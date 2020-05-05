@@ -22,6 +22,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
 // 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
 import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angular/icons';
+import { TinyEditorComponent } from './components/tiny-editor/tiny-editor.component';
+import {EditorModule} from "@tinymce/tinymce-angular";
 
 const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
 
@@ -43,10 +45,13 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
-    NzIconModule.forRoot(icons)
+    NzIconModule.forRoot(icons),
+    EditorModule
   ],
   providers: [{provide: NZ_I18N, useValue: zh_CN}, Help,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
+  exports: [
   ],
   bootstrap: [AppComponent]
 })

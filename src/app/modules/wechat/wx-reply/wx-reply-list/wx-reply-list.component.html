@@ -1,0 +1,59 @@
+<div class="table-operations">
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseSourceId" nzAllowClear nzPlaceHolder="Choose"
+             (ngModelChange)="getListByPage($event, true)">
+    <ng-container *ngFor="let item of wxAccounts">
+      <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
+    </ng-container>
+  </nz-select>&nbsp;&nbsp;
+  <button nz-button nzType="primary" [routerLink]="['../add',chooseSourceId]"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+</div>
+<nz-table
+  #staffTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage(chooseSourceId,false)"
+  (nzPageSizeChange)="getListByPage(chooseSourceId,true)">
+  <thead nzSingleSort>
+  <tr>
+    <th nzShowSort nzSortKey="keyWord">关键字</th>
+    <th nzShowSort nzSortKey="keyValue">内容</th>
+    <th nzShowSort nzSortKey="keyType">类型</th>
+    <th nzShowSort nzSortKey="num"><span>回复次数</span></th>
+    <th nzShowSort nzSortKey="status">状态</th>
+    <th nzShowSort nzSortKey="created">创建时间</th>
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of staffTable.data">
+    <td>{{data.keyWord}}</td>
+    <td>
+      <span *ngIf="data.keyType=='text'">{{data.keyValue}}</span>
+      <span *ngIf="data.keyType=='news'">{{data.mediaId}}</span>
+    </td>
+    <td><ng-container *ngIf="data.keyType=='text'">文本</ng-container>
+        <ng-container *ngIf="data.keyType=='news'">图文</ng-container></td>
+    <td>{{data.num}}</td>
+    <td><ng-container *ngIf="data.status=='1'">使用</ng-container>
+        <ng-container *ngIf="data.status=='2'">禁用</ng-container></td>
+    <td>{{data.created}}</td>
+    <td>
+      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+        class="anticon anticon-edit"></i></button>
+      <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
+                                                                                          theme="outline"
+                                                                                          twoToneColor="red"
+                                                                                          title="删除"></i></button>
+      </nz-popconfirm>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

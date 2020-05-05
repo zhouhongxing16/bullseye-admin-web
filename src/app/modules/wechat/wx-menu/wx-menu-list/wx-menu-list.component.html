@@ -1,0 +1,56 @@
+<div class="table-operations">
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
+             (ngModelChange)="getWxMenu($event)">
+    <ng-container *ngFor="let item of wxAccounts">
+      <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
+    </ng-container>
+  </nz-select>&nbsp;&nbsp;
+  <button nz-button nzType="primary" routerLink="../add" [queryParams]="{type: 'addOne', sourceId: chooseWxSourceId}"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+</div>
+
+<nz-table #expandTable [nzData]="rows" [nzHideOnSinglePage]="true">
+  <thead>
+  <tr>
+    <th nzWidth="40%">名称</th>
+    <th nzWidth="30%">菜单类型</th>
+    <th>需要登录</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let data of expandTable.data">
+    <ng-container *ngFor="let item of mapOfExpandedData[data.id]">
+      <tr *ngIf="item.parent && item.parent.expand || !item.parent">
+        <td
+          [nzIndentSize]="item.level * 20"
+          [nzShowExpand]="!!item.children"
+          [(nzExpand)]="item.expand"
+          (nzExpandChange)="collapse(mapOfExpandedData[data.id],item,$event)">
+          {{item.name}}
+        </td>
+        <td>{{item.type}}</td>
+        <td>
+            <ng-container *ngIf="item.author=='1'">是</ng-container>
+            <ng-container *ngIf="item.author=='2'">否</ng-container>
+        </td>
+        <td>
+          <button *ngIf="item.parentId==0" title="增加数据" [routerLink]="['../addChild']" [queryParams]="{id: data.id, type: 'addTwo'}" nz-button nzType="primary" nzShape="circle"><i
+            class="anticon anticon-save"></i></button>
+          <button title="修改数据" [routerLink]="['../edit']" [queryParams]="{id: item.id, type: 'edit'}" nz-button nzType="primary" nzShape="circle"><i
+            class="anticon anticon-edit"></i></button>
+          <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+            <button nz-popconfirm title="删除数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
+                                                                                              theme="outline"
+                                                                                              twoToneColor="red"
+                                                                                              title="删除"></i></button>
+          </nz-popconfirm>
+        </td>
+      </tr>
+    </ng-container>
+  </ng-container>
+  </tbody>
+</nz-table>
+
+<hr *ngIf="rows.length>0">
+<button *ngIf="rows.length>0" nz-popconfirm nzTitle="确定生成菜单吗?" (nzOnConfirm)="createWxMenu()" nz-button>生成菜单</button>

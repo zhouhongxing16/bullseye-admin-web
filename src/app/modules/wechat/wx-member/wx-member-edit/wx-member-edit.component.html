@@ -1,0 +1,49 @@
+
+<form nz-form >
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">头像</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-avatar [nzShape]="'square'" [nzSize]="120" [nzSrc]="obj.headImgUrl"></nz-avatar>
+    </nz-form-control>
+  </nz-form-item >
+
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="nickname">昵称</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      {{obj.nickname}}
+    </nz-form-control>
+  </nz-form-item >
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="nickname">openId</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      {{obj.openId}}
+    </nz-form-control>
+  </nz-form-item >
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="subscribe">状态</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <span *ngIf="obj.subscribe == 1">关注中</span>
+      <span *ngIf="obj.subscribe == 0">取消关注</span>
+    </nz-form-control>
+  </nz-form-item >
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="subscribe">地址</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      {{obj.country}}{{obj.province}}{{obj.city}}
+    </nz-form-control>
+  </nz-form-item >
+
+
+
+
+  <nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="dashed" (click)="this.help.goToPage('/wxmember/list', this.pageParams)" [nzLoading]="isLoading">取消</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

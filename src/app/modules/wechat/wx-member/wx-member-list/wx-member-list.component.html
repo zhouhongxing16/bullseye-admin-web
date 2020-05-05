@@ -1,0 +1,50 @@
+<div class="table-operations">
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
+             (ngModelChange)="getListByPage(true,chooseWxSourceId)">
+    <ng-container *ngFor="let item of wxAccounts">
+      <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
+    </ng-container>
+  </nz-select>&nbsp;&nbsp;
+</div>
+<nz-table
+  #staffTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)">
+  <thead nzSingleSort>
+  <tr>
+    <th nzShowSort nzSortKey="appSecret"><span>头像</span></th>
+    <th nzShowSort nzSortKey="name">昵称</th>
+    <th nzShowSort nzSortKey="email">性别</th>
+    <th nzShowSort nzSortKey="accountLocked">城市</th>
+    <th nzShowSort nzSortKey="status">是否关注</th>
+    <th nzShowSort nzSortKey="created">关注时间</th>
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of staffTable.data">
+    <td><nz-avatar [nzSrc]="data.headImgUrl"></nz-avatar></td>
+    <td>{{data.nickname}}</td>
+    <td>
+      <span *ngIf="data.sex == '1'">男</span>
+      <span *ngIf="data.sex == '2'">女</span>
+    </td>
+    <td>{{data.city}}</td>
+    <td>{{data.subscribe | flag}}</td>
+    <td>{{data.subscribeTime | date:"yyyy-MM-dd hh:ss"}}</td>
+    <td>
+      <button title="查看数据" (click)="goToPage('/wxmember/edit',{id:data.id})" nz-button nzType="primary" nzShape="circle">
+        <i nz-icon nzType="down" nzTheme="outline"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

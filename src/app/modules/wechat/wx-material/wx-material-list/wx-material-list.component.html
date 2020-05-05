@@ -1,0 +1,73 @@
+<div class="table-operations">
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
+             (ngModelChange)="getListByPage(true,chooseWxSourceId)">
+    <ng-container *ngFor="let item of wxAccounts">
+      <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
+    </ng-container>
+  </nz-select>&nbsp;&nbsp;
+  <button nz-button nzType="primary" [routerLink]="['../add',chooseWxSourceId]">
+    <i class="anticon anticon-plus"></i>添加
+  </button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+</div>
+
+<nz-table
+  #staffTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage(false,chooseWxSourceId)"
+  (nzPageSizeChange)="getListByPage(false,chooseWxSourceId)"
+  (nzCurrentPageDataChange)="currentPageDataChange($event)">
+  <thead nzSingleSort>
+  <tr>
+    <th nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked" [nzIndeterminate]="isIndeterminate"
+        (nzCheckedChange)="checkAll($event)"></th>
+    <th nzShowSort nzSortKey="mediaId">mediaId</th>
+    <th nzShowSort nzSortKey="name">名称</th>
+    <th nzShowSort nzSortKey="type">类型</th>
+    <th nzShowSort nzSortKey="title"><span>标题</span></th>
+    <th nzShowSort nzSortKey="created">创建时间</th>
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of staffTable.data">
+    <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()"></td>
+    <td>{{data.mediaId}}</td>
+    <td>{{data.name}}</td>
+    <td>{{data.type}}</td>
+    <td>{{data.title}}</td>
+    <td>{{data.created}}</td>
+    <td>
+      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+        class="anticon anticon-edit"></i></button>
+      <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+        <button nz-popconfirm title="删除数据" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i>
+        </button>
+      </nz-popconfirm>
+      <nz-popconfirm [nzTitle]="'确定生成吗?'" (nzOnConfirm)="UploadRow(data.id)">
+        <button nz-popconfirm title="生成素材" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon type="plus-circle" theme="outline" twoToneColor="red" title="生成素材"></i>
+        </button>
+      </nz-popconfirm>
+      <nz-popconfirm [nzTitle]="'确定删除永久素材吗?'" (nzOnConfirm)="unUploadRow(data.id)">
+        <button nz-popconfirm title="删除永久素材" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon type="minus-circle" theme="outline" twoToneColor="red" title="删除永久素材"></i>
+        </button>
+      </nz-popconfirm>
+      <nz-popconfirm [nzTitle]="'确定推送吗?'" (nzOnConfirm)="PubRow(data.id)">
+        <button nz-popconfirm title="群发素材" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon type="project" theme="outline" twoToneColor="red" title="群发推送"></i>
+        </button>
+      </nz-popconfirm>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

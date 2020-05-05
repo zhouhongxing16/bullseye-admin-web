@@ -1,0 +1,65 @@
+<div class="table-operations">
+  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed" (click)="deleteOfChecked()"><i class="anticon anticon-delete"></i>删除</button>
+  <nz-input-group nzSearch [nzAddOnAfter]="suffixButton" style="width: 500px">
+    <input type="text" nz-input placeholder="input search text"/>
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button nz-button nzType="primary" nzSearch>Search</button>
+  </ng-template>
+</div>
+
+<nz-divider nzText="公众号管理"></nz-divider>
+<nz-table
+  #staffTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)"
+  (nzCurrentPageDataChange)="currentPageDataChange($event)">
+  <thead nzSingleSort>
+  <tr>
+    <th nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked" [nzIndeterminate]="isIndeterminate"
+        (nzCheckedChange)="checkAll($event)"></th>
+    <th nzShowSort nzSortKey="logo">logo</th>
+    <th nzShowSort nzSortKey="name">名称</th>
+    <th nzShowSort nzSortKey="sourceId">ID</th>
+    <th nzShowSort nzSortKey="appId">appId</th>
+    <th nzShowSort nzSortKey="appSecret"><span>appSecret</span></th>
+    <th nzShowSort nzSortKey="status">status</th>
+    <th nzShowSort nzSortKey="created">创建时间</th>
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of staffTable.data">
+    <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()"></td>
+    <td>
+      <nz-avatar [nzShape]="'square'" [nzSize]="'large'"
+                 [nzSrc]="data.logo==null?'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png':data.logo"></nz-avatar>
+    </td>
+    <td>{{data.name}}</td>
+    <td>{{data.sourceId}}</td>
+    <td>{{data.appId}}</td>
+    <td>{{data.appSecret}}</td>
+    <td>{{data.status | status}}</td>
+    <td>{{data.created}}</td>
+    <td>
+      <button title="修改数据" (click)="goToPage('/wxaccount/edit',{id:data.id,code:authData.authCode})" nz-button nzType="primary" nzShape="circle"><i
+        class="anticon anticon-edit"></i></button>
+      <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
+        <button nz-popconfirm title="删除数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
+                                                                                          theme="outline"
+                                                                                          twoToneColor="red"
+                                                                                          title="删除"></i></button>
+      </nz-popconfirm>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

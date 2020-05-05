@@ -14,6 +14,7 @@ export class MonitorListComponent implements OnInit {
   jvm: any = {};
   sys: any = {};
   sysFiles: any = {};
+  test:''
 
   constructor(public service: MonitorService, public help: Help, public router: ActivatedRoute) {
   }
