@@ -1,0 +1,67 @@
+<div class="table-operations">
+  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+</div>
+<nz-table
+  #staffTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="isLoading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)">
+  <thead nzSingleSort>
+  <tr>
+    <th nzShowSort nzSortKey="name">名称</th>
+    <th nzShowSort nzSortKey="code">编码</th>
+    <th nzShowSort nzSortKey="describe">描述</th>
+    <th nzShowSort nzSortKey="dataAuthFlag"><span>数据权限</span></th>
+    <th nzShowSort nzSortKey="status">状态</th>
+    <th nzShowSort nzSortKey="created">创建时间</th>
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of staffTable.data">
+    <td>{{data.name}}</td>
+    <td>{{data.code}}</td>
+    <td>{{data.describe}}</td>
+    <td>{{data.dataAuthFlag}}</td>
+    <td>{{data.status | status}}</td>
+    <td>{{data.created}}</td>
+    <td>
+      <button title="菜单授权" (click)="addMenu(data.id)" nz-button nzType="primary" nzShape="circle"><i nz-icon type="windows" theme="outline"></i></button>
+      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+        class="anticon anticon-edit"></i></button>
+      <nz-popconfirm [nzTitle]="'确定删除吗?'" >
+        <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
+                                                                                          theme="outline"
+                                                                                          twoToneColor="red"
+                                                                                          title="删除"></i></button>
+      </nz-popconfirm>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+<nz-drawer [nzClosable]="false" [nzVisible]="drawerVisible" [nzWidth]="300" nzPlacement="right" nzTitle="菜单授权"
+           (nzOnClose)="close()">
+
+    <nz-tree
+      #menuAuthTree
+      [nzData]="nodes"
+      nzCheckable
+      nzMultiple
+      nzExpandAll
+      [nzCheckedKeys]="defaultCheckedKeys"
+      [nzSelectedKeys]="defaultSelectedKeys"
+      (nzClick)="nzEvent($event)"
+      (nzExpandChange)="nzEvent($event)"
+      (nzCheckBoxChange)="nzEvent($event)">
+    </nz-tree>
+  <button nz-button nzType="primary"  [nzLoading]="isLoading" (click)="getSelectedNodeList()">保存</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed" (click)="close()" [nzLoading]="isLoading">取消</button>
+</nz-drawer>

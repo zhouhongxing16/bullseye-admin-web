@@ -1,0 +1,117 @@
+  <div nz-row>
+    <div nz-col [nzSpan]="12">
+      <nz-card nzTitle="CPU">
+        <nz-table nzTemplateMode>
+          <thead>
+          <tr>
+            <th>参数</th>
+            <th>值</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>核心数</td>
+            <td>{{ cpu.cpuNum }}</td>
+          </tr>
+          <tr>
+            <td>系统占用</td>
+            <td>{{ cpu.sys }}%</td>
+          </tr>
+          <tr>
+            <td>用户使用</td>
+            <td>{{ cpu.used }}%</td>
+          </tr>
+          <tr>
+            <td>空闲</td>
+            <td>{{ cpu.free }}%</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </nz-card>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <nz-card nzTitle="内存">
+        <nz-table nzTemplateMode>
+          <thead>
+          <tr>
+            <th>属性</th>
+            <th>内存</th>
+            <th>JVM</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>总内存</td>
+            <td>{{mem.total}}G</td>
+            <td>{{jvm.total}}M</td>
+          </tr>
+          <tr>
+            <td>已用内存</td>
+            <td>{{mem.used}}G</td>
+            <td>{{jvm.used}}M</td>
+          </tr>
+          <tr>
+            <td>剩余内存</td>
+            <td>{{mem.free}}G</td>
+            <td>{{jvm.free}}M</td>
+          </tr>
+          <tr>
+            <td>使用率</td>
+            <td>{{mem.usage}}%</td>
+            <td>{{jvm.usage}}%</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </nz-card>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <nz-card nzTitle="服务器信息">
+        <nz-table nzTemplateMode>
+          <tbody>
+          <tr>
+            <td>服务器名称</td>
+            <td>{{sys.computerName}}</td>
+            <td>操作系统</td>
+            <td>{{sys.osName}}</td>
+          </tr>
+          <tr>
+            <td>服务器IP</td>
+            <td>{{sys.computerIp}}</td>
+            <td>系统架构</td>
+            <td>{{sys.osArch}}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </nz-card>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <nz-card nzTitle="Java虚拟机信息">
+        <nz-table nzTemplateMode>
+          <tbody>
+          <tr>
+            <td>Java名称</td>
+            <td>{{jvm.name}}G</td>
+            <td>Java版本</td>
+            <td>{{jvm.version}}</td>
+          </tr>
+          <tr>
+            <td>启动时间</td>
+            <td>{{jvm.startTime}}G</td>
+            <td>运行时长</td>
+            <td>{{jvm.runTime}}</td>
+          </tr>
+          <tr>
+            <td>安装路径</td>
+            <td>{{jvm.home}}</td>
+          </tr>
+          <tr>
+            <td>项目路径</td>
+            <td>{{sys.userDir}}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </nz-card>
+    </div>
+  </div>

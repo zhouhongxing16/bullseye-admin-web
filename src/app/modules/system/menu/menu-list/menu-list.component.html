@@ -1,0 +1,240 @@
+<nz-tree
+  nzBlockNode
+  [nzData]="nodes"
+  (nzClick)="activeNode($event)"
+  (nzDblClick)="openFolder($event)"
+  [nzTreeTemplate]="nzTreeTemplate"
+  [nzShowIcon]="true"
+></nz-tree>
+<ng-template #nzTreeTemplate let-node let-origin="origin">
+  <span class="custom-node">
+    <span *ngIf="!node.isLeaf" (contextmenu)="contextMenu($event, dd_menu,node)">
+      <i nz-icon [nzType]="node.isExpanded ? 'folder-open' : 'folder'" (click)="openFolder(node)"></i>
+      <span class="folder-name">{{ node.title }}</span>
+    </span>
+    <span *ngIf="node.isLeaf" (contextmenu)="contextMenu($event, dd_menu,node)">
+      <i nz-icon nzType="file"></i>
+      <span class="file-name">{{ node.title }}</span>
+    </span>
+  </span>
+</ng-template>
+<nz-dropdown-menu #dd_menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item (click)="createMenu()">增加</li>
+    <li nz-menu-item (click)="editMenu()">修改</li>
+    <li nz-menu-item (click)="addAuth()">权限</li>
+    <li nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteObject()" nz-menu-item>删除</li>
+  </ul>
+</nz-dropdown-menu>
+
+<!--
+<nz-tree
+  #menuTree
+  [nzData]="nodes"
+  (nzClick)="activeNode($event)"
+  (nzDblClick)="openFolder($event)" nzShowIcon>
+  <ng-template #nzTreeTemplate let-node>
+    <span class="custom-node" [class.active]="activateNode?.key===node.key">
+      <span *ngIf="!node.isLeaf" (contextmenu)="contextMenu($event,contextTemplate,node)">
+        <i nz-icon [type]="node.isExpanded ? 'folder-open' : 'folder'" (click)="openFolder(node)"></i>
+        <span class="folder-name">{{node.title}}</span>
+      </span>
+      <span *ngIf="node.isLeaf" (contextmenu)="contextMenu($event,contextTemplate,node)">
+        <i nz-icon type="file"></i>
+        <span class="file-name">{{node.title}}</span>
+      </span>
+    </span>
+  </ng-template>
+
+  <ng-template #contextTemplate>
+    <ul nz-menu nzInDropDown>
+      <li nz-menu-item (click)="createMenu()">增加</li>
+&lt;!&ndash;      <li nz-menu-item (click)="editMenu()">修改</li>&ndash;&gt;
+      <li nz-menu-item (click)="addAuth()">权限</li>
+      <li nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteObject()" nz-menu-item nz-popconfirm>删除</li>
+    </ul>
+  </ng-template>
+</nz-tree>-->
+<nz-modal nzClosable="true" [(nzVisible)]="drawerMenuAuthVisible" nzTitle="菜单权限"
+          nzWidth="40%" (nzOnCancel)="close()" [nzFooter]="modalFooter">
+  <form nz-form  [formGroup]="validateAuthForm">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="menuId">菜单</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-tree-select [(ngModel)]="menuAuth.menuId" formControlName="menuId"
+          [nzExpandedKeys]="menuAuth.menuId"
+          [nzNodes]="nodes" nzShowSearch nzPlaceHolder="请选择"
+          (ngModelChange)="onAuthMenuChange($event)">
+        </nz-tree-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="name" [(ngModel)]="menuAuth.name" name="name">
+
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">code</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="code" [(ngModel)]="menuAuth.code" name="code">
+
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="path">path</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="path" [(ngModel)]="menuAuth.path" name="path">
+
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-radio-group formControlName="status" [(ngModel)]="menuAuth.status" name="status">
+          <label nz-radio [nzValue]="1">启用</label>
+          <label nz-radio [nzValue]="0">禁用</label>
+        </nz-radio-group>
+
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row style="margin-bottom:8px;">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button
+                nzType="primary" [disabled]="!validateAuthForm.valid" [nzLoading]="isLoading" (click)="saveOrUpdateMenuAuth()">
+          保存</button>&nbsp;&nbsp;
+      </nz-form-control>
+    </nz-form-item>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="close()">关闭</button>
+    </ng-template>
+  </form>
+  <nz-table
+    #menuAuthTable
+    nzShowSizeChanger
+    [nzData]="rows"
+    [nzScroll]="{x:'100%'}"
+    [nzLoading]="isLoading"
+    [nzTotal]="total"
+    [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageSize"
+    [nzFrontPagination]="false"
+    (nzPageIndexChange)="getAuthListByPage()"
+    (nzPageSizeChange)="getAuthListByPage()">
+    <thead nzSingleSort>
+      <tr>
+        <th nzShowSort nzSortKey="name">名称</th>
+        <th nzShowSort nzSortKey="code">编码</th>
+        <th nzShowSort nzSortKey="describe">描述</th>
+        <th nzShowSort nzSortKey="status">状态</th>
+        <th nzShowSort nzSortKey="created">创建时间</th>
+        <th>
+          <span>操作</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of menuAuthTable.data">
+        <td>{{data.name}}</td>
+        <td>{{data.code}}</td>
+        <td>{{data.path}}</td>
+        <td>{{data.status | status}}</td>
+        <td>{{data.created}}</td>
+        <td>
+          <button title="修改数据" (click)="setData(data.id)" nz-button nzType="primary" nzShape="circle">
+            <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i>
+          </button>
+          <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" title="修改数据" nz-button nzType="primary"
+                  nzShape="circle">
+            <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-modal>
+
+<!--菜单添加修改抽屉-->
+<nz-drawer [nzClosable]="false" [nzVisible]="drawerMenuVisible" nzPlacement="right"
+                                                                nzTitle="菜单编辑" (nzOnClose)="close()" [nzWidth]="400">
+  <form nz-form [formGroup]="validateForm">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="parentId">父节点</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-tree-select [(ngModel)]="menu.parentId" formControlName="parentId"
+          [nzExpandedKeys]="expandedRightMenuKeys"
+          [nzNodes]="nodes"
+                                                    nzShowSearch
+                                                    nzPlaceHolder="请选择"
+          (ngModelChange)="onChange($event)">
+        </nz-tree-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入名称!">
+        <input nz-input formControlName="title" [(ngModel)]="menu.title" placeholder="名称" name="title" id="title">
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">code</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入编码!">
+        <input nz-input formControlName="code" [(ngModel)]="menu.code" name="code" id="code">
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sourceId">icon</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入ICON!">
+        <input nz-input formControlName="icon" [(ngModel)]="menu.icon" name="icon" id="icon">
+
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="path">path</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入路径!">
+        <input nz-input formControlName="path" [(ngModel)]="menu.path" name="path" id="path">
+
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sort">sort</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入序号!">
+        <input nz-input formControlName="sort" [(ngModel)]="menu.sort" name="sort" id="sort">
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择状态!">
+        <nz-radio-group formControlName="status" [(ngModel)]="menu.status" name="status" id="status">
+          <label nz-radio [nzValue]="1">启用</label>
+          <label nz-radio [nzValue]="0">禁用</label>
+        </nz-radio-group>
+
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-row style="margin-bottom:8px;">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button
+                nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading"  (click)="submitForm()">
+          保存</button>&nbsp;&nbsp;
+        <button nz-button nzType="dashed" (click)="close()" [nzLoading]="isLoading">取消</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-drawer>

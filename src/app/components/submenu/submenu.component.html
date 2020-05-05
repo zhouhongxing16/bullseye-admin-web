@@ -1,0 +1,12 @@
+<ul>
+  <ng-container *ngFor="let item of menus">
+    <li *ngIf="item.children!=null" nz-submenu nz-submenu [nzTitle]="item.title">
+      <app-submenu [menus]="item.children"></app-submenu>
+
+    </li>
+    <li *ngIf="item.children==null" nz-menu-item (click)="goToPage(item)">
+        {{item.title}}
+    </li>
+
+  </ng-container>
+</ul>

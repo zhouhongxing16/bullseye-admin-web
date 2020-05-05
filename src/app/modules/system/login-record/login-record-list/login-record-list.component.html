@@ -1,0 +1,68 @@
+<div class="table-operations">
+<!--  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>-->
+</div>
+<nz-table
+  #loginRecordTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)">
+  <thead nzSingleSort>
+  <tr>
+
+    <th nzShowSort nzSortKey="username">登录账号</th>
+
+    <th nzShowSort nzSortKey="ip">登录IP地址</th>
+
+    <th nzShowSort nzSortKey="loginLocation">登录地点</th>
+
+    <th nzShowSort nzSortKey="browser">浏览器类型</th>
+
+    <th nzShowSort nzSortKey="os">操作系统</th>
+
+    <th nzShowSort nzSortKey="status">登录状态</th>
+
+    <th nzShowSort nzSortKey="message">提示消息</th>
+
+    <th nzShowSort nzSortKey="created">访问时间</th>
+
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of  loginRecordTable.data">
+
+    <td>{{data.username}}</td>
+
+    <td>{{data.ip}}</td>
+
+    <td>{{data.loginLocation}}</td>
+
+    <td>{{data.browser}}</td>
+
+    <td>{{data.os}}</td>
+
+    <td>{{data.status==1?'成功':'失败'}}</td>
+
+    <td>{{data.message}}</td>
+
+    <td>{{data.created}}</td>
+
+    <td>
+      <!--<button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
+        class="anticon anticon-edit"></i></button>-->
+      <nz-popconfirm [nzTitle]="'确定删除吗?'">
+        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i></button>
+      </nz-popconfirm>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

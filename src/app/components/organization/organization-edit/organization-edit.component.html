@@ -1,0 +1,114 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="pid" [(ngModel)]="obj.pid" name="pid" id="pid">
+      <nz-form-explain *ngIf="validateForm.get('pid').dirty && validateForm.get('pid').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织编码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="code" [(ngModel)]="obj.code" name="code" id="code">
+      <nz-form-explain *ngIf="validateForm.get('code').dirty && validateForm.get('code').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
+      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所在地区</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="areaId" [(ngModel)]="obj.areaId" name="areaId" id="areaId">
+      <nz-form-explain *ngIf="validateForm.get('areaId').dirty && validateForm.get('areaId').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织简介</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="brief" [(ngModel)]="obj.brief" name="brief" id="brief">
+      <nz-form-explain *ngIf="validateForm.get('brief').dirty && validateForm.get('brief').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">联系人</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="contactName" [(ngModel)]="obj.contactName" name="contactName" id="contactName">
+      <nz-form-explain *ngIf="validateForm.get('contactName').dirty && validateForm.get('contactName').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">联系电话</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="contactPhone" [(ngModel)]="obj.contactPhone" name="contactPhone" id="contactPhone">
+      <nz-form-explain *ngIf="validateForm.get('contactPhone').dirty && validateForm.get('contactPhone').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">试用结束日期</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="endDate" [(ngModel)]="obj.endDate" name="endDate" id="endDate">
+      <nz-form-explain *ngIf="validateForm.get('endDate').dirty && validateForm.get('endDate').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">域名</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="domain" [(ngModel)]="obj.domain" name="domain" id="domain">
+      <nz-form-explain *ngIf="validateForm.get('domain').dirty && validateForm.get('domain').errors">
+        必填
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
+        <label nz-radio [nzValue]="0">启用</label>
+        <label nz-radio [nzValue]="1">禁用</label>
+      </nz-radio-group>
+      <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
+        必选
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" routerLink="/organization/list" [nzLoading]="isLoading">取消</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

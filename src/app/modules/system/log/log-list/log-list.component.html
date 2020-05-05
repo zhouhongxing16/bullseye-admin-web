@@ -1,0 +1,73 @@
+<div class="table-operations">
+  <!--  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+    <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>-->
+</div>
+<nz-table
+  #logTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)">
+  <thead nzSingleSort>
+  <tr>
+
+    <th nzShowSort nzSortKey="organizationId" [nzWidth]="100">所属组织</th>
+
+    <th nzShowSort nzSortKey="optionName">操作类</th>
+
+    <th nzShowSort nzSortKey="optionType">操作方法名</th>
+
+    <!--<th nzShowSort nzSortKey="method">操作方法</th>-->
+
+    <th nzShowSort nzSortKey="params">参数</th>
+
+    <th nzShowSort nzSortKey="userId">操作人</th>
+
+    <th nzShowSort nzSortKey="ip">IP</th>
+
+    <th nzShowSort nzSortKey="executionTime">执行时长(ms)</th>
+
+    <th nzShowSort nzSortKey="created">操作时间</th>
+
+    <th nzShowSort nzSortKey="status">状态</th>
+
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of  logTable.data">
+
+    <td>{{data.organizationId}}</td>
+
+    <td>{{data.optionName}}</td>
+
+    <td>{{data.optionType}}</td>
+
+    <!--<td style="max-width: 5%">{{data.method}}</td>-->
+
+    <td>{{data.params}}</td>
+
+    <td>{{data.userId}}</td>
+
+    <td>{{data.ip}}</td>
+
+    <td>{{data.executionTime}}</td>
+
+    <td>{{data.created}}</td>
+
+    <td><div  [innerHTML]="data.status | status"></div></td>
+    <td>
+      <nz-popconfirm [nzTitle]="'确定删除吗?'">
+        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i></button>
+      </nz-popconfirm>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
