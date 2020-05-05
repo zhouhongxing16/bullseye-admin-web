@@ -74,8 +74,10 @@ export class BaseListComponent<T> implements OnInit {
   }
 
   initAuth(code: string) {
+    if(this.authData.auths.length==0){
+      return true
+    }
     if (this.authData.flag) {
-      console.log(code);
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.authData.auths.length; i++) {
         if (this.authData.auths[i].code === code) {

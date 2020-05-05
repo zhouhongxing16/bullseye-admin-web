@@ -1,0 +1,48 @@
+<div class="table-operations">
+  <button nz-button nzType="primary" routerLink="../add" *ngIf="initAuth('add')">
+    <i nz-icon nzType="plus" nzTheme="outline"></i> 添加
+  </button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+</div>
+<nz-table
+  #staffTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)">
+  <thead nzSingleSort>
+  <tr>
+    <th nzShowSort nzSortKey="name">姓名</th>
+    <th nzShowSort nzSortKey="serialNo">编号</th>
+    <th nzShowSort nzSortKey="mobile">电话</th>
+    <th nzShowFilter>性别</th>
+    <th nzShowSort nzSortKey="email"><span>Email</span></th>
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of staffTable.data">
+    <td>{{data.name}}</td>
+    <td>{{data.serialNo}}</td>
+    <td>{{data.mobile}}</td>
+    <td>{{data.genderId}}</td>
+    <td>{{data.email}}</td>
+    <td>
+      <button title="修改数据" (click)="goToPage('/staff/edit',{id:data.id,code:authData.authCode})" nz-button
+              nzType="primary" nzShape="circle" *ngIf="initAuth('edit')">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </button>
+      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="initAuth('delete')"
+              title="删除数据" nz-button nzType="primary" nzShape="circle">
+        <i nz-icon nzType="delete" nzTheme="outline" title="删除"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

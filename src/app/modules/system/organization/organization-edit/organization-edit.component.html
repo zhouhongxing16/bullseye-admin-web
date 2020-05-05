@@ -1,0 +1,84 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">父级组织</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="pid" [(ngModel)]="obj.pid" name="pid" id="pid">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织编码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写组织编码">
+      <input nz-input formControlName="code" [(ngModel)]="obj.code" name="code" id="code">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写组织名称">
+      <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所在地区</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写所在地区">
+      <input nz-input formControlName="areaId" [(ngModel)]="obj.areaId" name="areaId" id="areaId">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">组织简介</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请填写组织简介">
+      <input nz-input formControlName="brief" [(ngModel)]="obj.brief" name="brief" id="brief">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">联系人</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写联系人">
+      <input nz-input formControlName="contactName" [(ngModel)]="obj.contactName" name="contactName" id="contactName">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">联系电话</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写电话号码">
+      <input nz-input formControlName="contactPhone" [(ngModel)]="obj.contactPhone" name="contactPhone" id="contactPhone">
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">试用结束日期</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="endDate" [(ngModel)]="obj.endDate" name="endDate" id="endDate">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="name">域名</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="domain" [(ngModel)]="obj.domain" name="domain" id="domain">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择状态">
+      <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
+        <label nz-radio [nzValue]="0">启用</label>
+        <label nz-radio [nzValue]="1">禁用</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" routerLink="/organization/list" [nzLoading]="isLoading">取消</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

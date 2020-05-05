@@ -1,0 +1,58 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所属组织</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择所属组织">
+      <input nz-input formControlName="organizationId" [(ngModel)]="obj.organizationId" name="organizationId"
+             id="organizationId">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">代码</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写代码">
+      <input nz-input formControlName="code" [(ngModel)]="obj.code" name="code" id="code">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入名称">
+      <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">类型</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入名称">
+      <input nz-input formControlName="typeId" [(ngModel)]="obj.typeId" name="typeId" id="typeId">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">简介</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+<!--      <app-ng-editor [(content)]="obj.status" formControlName="remark" ngDefaultControl name="remark"
+                     id="remark"></app-ng-editor>-->
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="选择状态">
+      <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status">
+        <label nz-radio [nzValue]="1">启用</label>
+        <label nz-radio [nzValue]="0">禁用</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" (click)="help.goToPage('/department/list',this.pageParams)"
+              [nzLoading]="isLoading">取消
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -1,0 +1,83 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">账户</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写账号">
+      <input nz-input formControlName="username" [(ngModel)]="obj.username" name="username" id="username">
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">人员</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择人员">
+      <input nz-input formControlName="staffId" [(ngModel)]="obj.staffId" name="staffId" id="staffId">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">邮箱</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请填写邮箱">
+      <input nz-input formControlName="email" [(ngModel)]="obj.email" name="email" id="email">
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="accountLocked">是否锁定</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-switch [(ngModel)]="obj.accountLocked" formControlName="accountLocked" name="accountLocked" id="accountLocked" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="mobileLoginFlag">是否开通手机号登录</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-switch  [(ngModel)]="obj.mobileLoginFlag" formControlName="mobileLoginFlag" name="mobileLoginFlag" id="mobileLoginFlag" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="accountExpired">是否过期</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-switch   [(ngModel)]="obj.accountExpired" formControlName="accountExpired"  name="accountExpired" id="accountExpired" nzCheckedChildren="启用" nzUnCheckedChildren="禁用"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+
+
+  <nz-form-item *ngIf="obj.accountExpired">
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">账号过期时间</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择过期时间">
+      <nz-date-picker formControlName="expiredDate"  [(ngModel)]="obj.expiredDate" id="expiredDate"
+        nzShowTime
+        nzFormat="yyyy-MM-dd HH:mm:ss"
+        nzPlaceHolder="选择过期时间"
+      ></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="name">备注</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择状态">
+      <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
+        <label nz-radio [nzValue]="1">启用</label>
+        <label nz-radio [nzValue]="0">禁用</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" routerLink="/account/list" [nzLoading]="isLoading">取消</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

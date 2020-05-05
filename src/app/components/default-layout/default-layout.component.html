@@ -11,27 +11,23 @@
         [nzType]="help.isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="help.isCollapsed = !help.isCollapsed"
       ></i>
-      <div style="float: right;margin-left: 1%">
-        <nz-avatar [nzSrc]="'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1549969134321&di=113371aa86883c695f6d88bc4613c936&imgtype=0&src=http%3A%2F%2Fwww.5snow.com%2Ffiles%2Fa%2Fa0319f12a7c895a6b942227a7e6c9c1f.jpg'"></nz-avatar>
-      </div>
-      <div style="float: right;">
-        <ng-container *ngIf="userInfo" nz-dropdown [nzDropdownMenu]="menu">
-          {{userInfo.name}}
-          <nz-avatar [nzSrc]="userInfo.avatar"></nz-avatar>
-        </ng-container>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item>
-              <a (click)="goToProfile()">个人信息</a>
-            </li>
-            <li nz-menu-item>
-              <a (click)="showChangePasswordModal()">修改密码</a>
-            </li>
-            <li nz-menu-divider></li>
-            <li nz-menu-item (click)="showLogoutConfirm()">退出</li>
-
-          </ul>
-        </nz-dropdown-menu>
+      <div style="float: right;margin-right: 1%">
+        <a nz-dropdown [nzDropdownMenu]="menu">
+            {{userInfo.name}}
+          <nz-avatar [nzSrc]="help.environment.SERVER_URL+userInfo.avatar"></nz-avatar>
+        </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>
+                <a (click)="goToProfile()">个人信息</a>
+              </li>
+              <li nz-menu-item>
+                <a (click)="showChangePasswordModal()">修改密码</a>
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="showLogoutConfirm()">退出</li>
+            </ul>
+          </nz-dropdown-menu>
       </div>
     </nz-header>
     <nz-content style="margin:0 16px;">
@@ -46,16 +42,14 @@
     </nz-content>
 
 <!--    修改密码modal-->
-   <!-- <nz-modal nzMaskClosable="false" [(nzVisible)]="passwordChangeModalFalse" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="submitPasswordForm()">
+    <nz-modal nzMaskClosable="false" [(nzVisible)]="passwordChangeModalFalse" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="submitPasswordForm()">
       <form nz-form [formGroup]="validatePasswordForm">
 
         <nz-form-item>
           <nz-form-label [nzSpan]="6" nzRequired nzFor="oldPassword">旧密码</nz-form-label>
           <nz-form-control [nzSpan]="16" nzErrorTip="请输入旧密码">
             <input type="password" [(ngModel)]="password.oldPassword" nz-input formControlName="oldPassword" placeholder="请输入旧密码" />
-            &lt;!&ndash;<nz-form-explain *ngIf="validatePasswordForm.get('oldPassword').dirty && validatePasswordForm.get('oldPassword').errors">
-              必填
-            </nz-form-explain>&ndash;&gt;
+
           </nz-form-control>
         </nz-form-item>
 
@@ -63,24 +57,18 @@
           <nz-form-label [nzSpan]="6" nzRequired nzFor="newPassword">新密码</nz-form-label>
           <nz-form-control [nzSpan]="16" nzErrorTip="请输入新密码">
             <input type="password" [(ngModel)]="password.newPassword" nz-input formControlName="newPassword" placeholder="请输入新密码" />
-            &lt;!&ndash;<nz-form-explain *ngIf="validatePasswordForm.get('newPassword').dirty && validatePasswordForm.get('newPassword').errors">
-              必填
-            </nz-form-explain>&ndash;&gt;
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="6" nzRequired nzFor="confirmPassword">确认新密码</nz-form-label>
-          <nz-form-control [nzSpan]="16" nzErrorTip="请确认新密码">
-            <input type="password"  [(ngModel)]="password.confirmPassword" nz-input formControlName="confirmPassword" placeholder="请确认新密码" />
-           &lt;!&ndash; <nz-form-explain *ngIf="validatePasswordForm.get('confirmPassword').dirty && validatePasswordForm.get('confirmPassword').errors">
-              必须与新密码相同
-            </nz-form-explain>&ndash;&gt;
+          <nz-form-control [nzSpan]="16" nzErrorTip="必须与新密码相同">
+            <input type="password" [(ngModel)]="password.confirmPassword" nz-input formControlName="confirmPassword" placeholder="请输入新密码" />
           </nz-form-control>
         </nz-form-item>
 
       </form>
-    </nz-modal>-->
+    </nz-modal>
   </nz-layout>
 </nz-layout>
 <ng-template #trigger>

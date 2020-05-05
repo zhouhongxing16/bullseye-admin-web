@@ -56,7 +56,11 @@ export class DefaultLayoutComponent implements OnInit {
 
   goToProfile() {
     console.log(this.userInfo.id);
-    this.router.navigate(['/staff/edit', this.userInfo.id]);
+    this.router.navigate(['/staff/edit'], {
+      queryParams: {
+        id: this.userInfo.id
+      }
+    });
   }
 
   showChangePasswordModal() {
