@@ -21,6 +21,14 @@ const routes: Routes = [
           import('././modules/system/login-record/login-record.module').then(m => m.LoginRecordModule)
       },
       {path: 'monitor', loadChildren: () => import('././modules/system/monitor/monitor.module').then(m => m.MonitorModule)},
+
+      // 微信
+      {path: 'wxaccount',  loadChildren: () => import('././modules/wechat/wx-account/wx-account.module').then(m => m.WxAccountModule)},
+      {path: 'wxmember',  loadChildren: () => import( '././modules/wechat/wx-member/wx-member.module').then(m => m.WxMemberModule)},
+      {path: 'wxmenu',  loadChildren: () => import( '././modules/wechat/wx-menu/wx-menu.module').then(m => m.WxMenuModule)},
+      {path: 'wxreply',  loadChildren: () => import( '././modules/wechat/wx-reply/wx-reply.module').then(m => m.WxReplyModule)},
+      {path: 'wxmaterial',  loadChildren: () => import('././modules/wechat/wx-material/wx-material.module').then(m => m.WxMaterialModule)},
+
       {path: '', loadChildren: () => import('././modules/home/home.module').then(m => m.HomeModule)}
     ]
   },

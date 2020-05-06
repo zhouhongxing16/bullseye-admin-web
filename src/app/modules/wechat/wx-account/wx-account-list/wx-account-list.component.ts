@@ -11,14 +11,6 @@ import {BaseListComponent} from '../../../../components/base-list/base-list.comp
   styleUrls: ['./wx-account-list.component.scss']
 })
 export class WxAccountListComponent extends BaseListComponent<WxAccount> {
-  rows: WxAccount[] = [];
-  total = 0;
-  pageIndex = 1;
-  pageSize = 8;
-  sortValue = null;
-  sortKey = null;
-  loading = false;
-
   // 方法开始全选多选
   isAllDisplayDataChecked = false;
   isIndeterminate = false;

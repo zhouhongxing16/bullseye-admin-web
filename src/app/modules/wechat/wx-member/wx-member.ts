@@ -3,7 +3,7 @@ export class WxMember {
 
   sourceId: string;
 
-  subscribe: string;
+  subscribe: number;
 
   openId: string;
 

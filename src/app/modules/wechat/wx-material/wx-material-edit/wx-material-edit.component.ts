@@ -7,7 +7,6 @@ import {WxMaterial} from "../wx-material";
 import {switchMap} from 'rxjs/operators';
 import {Observable, Observer, of} from 'rxjs';
 import {UploadFile} from 'ng-zorro-antd';
-import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn.js';
 import {environment} from '../../../../../environments/environment';
 
 @Component({

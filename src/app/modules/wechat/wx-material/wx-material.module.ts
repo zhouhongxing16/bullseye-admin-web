@@ -6,8 +6,6 @@ import { WxMaterialListComponent } from './wx-material-list/wx-material-list.com
 import { WxMaterialEditComponent } from './wx-material-edit/wx-material-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
-import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
-import {AppModule} from "../../../app.module";
 
 @NgModule({
   declarations: [WxMaterialListComponent, WxMaterialEditComponent],
@@ -17,8 +15,6 @@ import {AppModule} from "../../../app.module";
     ReactiveFormsModule,
     FormsModule,
     NgZorroAntdModule,
-    CKEditorModule,
-    AppModule
   ]
 })
 export class WxMaterialModule { }

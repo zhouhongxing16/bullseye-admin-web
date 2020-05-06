@@ -12,7 +12,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class DefaultLayoutComponent implements OnInit {
 
   title = 'bullseye-admin-web';
-  userInfo: any;
+  userInfo: any = {};
   menus: any;
   triggerTemplate: TemplateRef<void> | null = null;
   passwordChangeModalFalse: boolean;

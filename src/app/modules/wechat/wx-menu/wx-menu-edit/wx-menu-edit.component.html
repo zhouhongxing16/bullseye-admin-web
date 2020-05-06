@@ -1,103 +1,76 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入名称">
       <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
-      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="type">菜单类型</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择">
       <nz-radio-group formControlName="type" [(ngModel)]="obj.type" name="type" id="type">
         <label nz-radio [nzValue]="'view'">网页</label>
         <label nz-radio [nzValue]="'click'" >点击</label>
         <label nz-radio [nzValue]="'miniprogram'">小程序</label>
         <label nz-radio [nzValue]="'view_limited'" (click)="getMediaId()">素材发送</label>
       </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
-        必选
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item *ngIf="obj.type=='view'||obj.type=='miniprogram'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="url">地址</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入地址">
       <input nz-input formControlName="url" [(ngModel)]="obj.url" name="url" id="url">
     </nz-form-control>
-    <nz-form-explain *ngIf="validateForm.get('url').dirty && validateForm.get('url').errors">
-      必填
-    </nz-form-explain>
   </nz-form-item>
 
   <nz-form-item *ngIf="obj.type=='click'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="keyValue">key值</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入key值">
       <input nz-input formControlName="keyValue" [(ngModel)]="obj.keyValue" name="keyValue" id="keyValue">
     </nz-form-control>
-    <nz-form-explain *ngIf="validateForm.get('keyValue').dirty && validateForm.get('keyValue').errors">
-      必填
-    </nz-form-explain>
   </nz-form-item>
 
   <nz-form-item *ngIf="obj.type=='view_limited'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="mediaId">素材</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择">
       <nz-select formControlName="mediaId" id="mediaId" name="mediaId" [(ngModel)]="obj.mediaId" nzAllowClear nzPlaceHolder="Choose">
         <ng-container *ngFor="let item of wxMaterialList">
           <nz-option [nzLabel]="item.name" [nzValue]="item.mediaId"></nz-option>
         </ng-container>
       </nz-select>
     </nz-form-control>
-    <!--<nz-form-explain *ngIf="validateForm.get('mediaId').dirty && validateForm.get('mediaId').errors">
-      必填
-    </nz-form-explain>-->
   </nz-form-item>
 
   <nz-form-item *ngIf="obj.type=='miniprogram'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="appId">小程序的appid</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入小程序appId">
       <input nz-input formControlName="appId" [(ngModel)]="obj.appId" name="appId" id="appId">
     </nz-form-control>
-    <!--<nz-form-explain *ngIf="validateForm.get('appId').dirty && validateForm.get('appId').errors">
-      必填
-    </nz-form-explain>-->
   </nz-form-item>
 
   <nz-form-item *ngIf="obj.type=='miniprogram'">
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="pagePath">小程序的页面路径</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入小程序页面路径">
       <input nz-input formControlName="pagePath" [(ngModel)]="obj.pagePath" name="pagePath" id="pagePath">
     </nz-form-control>
-    <!--<nz-form-explain *ngIf="validateForm.get('pagePath').dirty && validateForm.get('pagePath').errors">
-      必填
-    </nz-form-explain>-->
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="author">用户信息获取</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择">
       <nz-radio-group formControlName="author" [(ngModel)]="obj.author" name="author" id="author">
         <label nz-radio [nzValue]="'1'">否</label>
         <label nz-radio [nzValue]="'2'">是</label>
       </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('author').dirty && validateForm.get('author').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sort">排序</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入排序（值越大越靠前）">
       <input nz-input formControlName="sort" [(ngModel)]="obj.sort" name="sort" id="sort">
-      <nz-form-explain *ngIf="validateForm.get('sort').dirty && validateForm.get('sort').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 

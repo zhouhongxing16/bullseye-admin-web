@@ -1,12 +1,12 @@
 <div class="table-operations">
   <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
-             (ngModelChange)="getListByPage(true,chooseWxSourceId)">
+             (ngModelChange)="getListByPage(true)">
     <ng-container *ngFor="let item of wxAccounts">
       <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
     </ng-container>
   </nz-select>&nbsp;&nbsp;
   <button nz-button nzType="primary" [routerLink]="['../add',chooseWxSourceId]">
-    <i class="anticon anticon-plus"></i>添加
+    <i nz-icon nzType="plus" nzTheme="outline"></i>添加
   </button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
@@ -16,13 +16,13 @@
   nzShowSizeChanger
   [nzData]="rows"
   [nzScroll]="{x:'100%'}"
-  [nzLoading]="loading"
+  [nzLoading]="help.isLoading"
   [nzTotal]="total"
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
   [nzFrontPagination]="false"
-  (nzPageIndexChange)="getListByPage(false,chooseWxSourceId)"
-  (nzPageSizeChange)="getListByPage(false,chooseWxSourceId)"
+  (nzPageIndexChange)="getListByPage(false)"
+  (nzPageSizeChange)="getListByPage(false)"
   (nzCurrentPageDataChange)="currentPageDataChange($event)">
   <thead nzSingleSort>
   <tr>
@@ -46,23 +46,23 @@
     <td>{{data.created}}</td>
     <td>
       <button title="修改数据" (click)="goToPage('/wxmaterial/edit',{id:data.id,code:authData.authCode})" nz-button
-              nzType="primary" nzShape="circle" *ngIf="auth.edit">
+              nzType="primary" nzShape="circle" *ngIf="auth.edit||authData.flag">
         <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i></button>
-      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete"
+      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete||authData.flag"
               title="删除数据" nz-button nzType="primary" nzShape="circle">
         <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
       </button>
       <button nz-popconfirm nzPopconfirmTitle='确定生成吗?' (nzOnConfirm)="UploadRow(data.id)" title="生成素材" nz-button
               nzType="primary" nzShape="circle">
-        <i nz-icon type="plus-circle" theme="outline" twoToneColor="red" title="生成素材"></i>
+        <i nz-icon nzType="plus-circle" nzTheme="outline"  title="生成素材"></i>
       </button>
       <button nz-popconfirm nzPopconfirmTitle='确定删除永久素材吗?' (nzOnConfirm)="unUploadRow(data.id)" title="删除永久素材" nz-button
               nzType="primary" nzShape="circle">
-        <i nz-icon type="minus-circle" theme="outline" twoToneColor="red" title="删除永久素材"></i>
+        <i nz-icon nzType="minus-circle" nzTheme="outline"  title="删除永久素材"></i>
       </button>
       <button nz-popconfirm nzPopconfirmTitle='确定推送吗?' (nzOnConfirm)="PubRow(data.id)" title="群发素材" nz-button
               nzType="primary" nzShape="circle">
-        <i nz-icon type="project" theme="outline" twoToneColor="red" title="群发推送"></i>
+        <i nz-icon nzType="user-switch" nzTheme="outline"  title="群发推送"></i>
       </button>
     </td>
   </tr>

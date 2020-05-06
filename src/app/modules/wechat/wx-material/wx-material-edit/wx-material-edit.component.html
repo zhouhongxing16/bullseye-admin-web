@@ -1,17 +1,14 @@
 <form enctype="multipart/form-data" nz-form [formGroup]="validateForm">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">素材名称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入名称">
       <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
-      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="type">素材类型</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择">
       <nz-radio-group formControlName="type" [(ngModel)]="obj.type" name="type" id="type">
         <!--<label nz-radio [nzValue]="'image'">图片</label>
         <label nz-radio [nzValue]="'voice'">语音</label>
@@ -19,19 +16,13 @@
         <label nz-radio [nzValue]="'thumb'">缩略图</label>-->
         <label nz-radio [nzValue]="'news'">图文</label>
       </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('type').dirty && validateForm.get('type').errors">
-        必选
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="title">标题</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入标题">
       <input nz-input formControlName="title" [(ngModel)]="obj.title" name="title" id="title">
-      <nz-form-explain *ngIf="validateForm.get('title').dirty && validateForm.get('title').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
@@ -59,14 +50,11 @@
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="showCoverPic">显示封面</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择">
       <nz-radio-group formControlName="showCoverPic" [(ngModel)]="obj.showCoverPic" name="showCoverPic" id="showCoverPic">
         <label nz-radio [nzValue]=false>否</label>
         <label nz-radio [nzValue]=true>是</label>
       </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('showCoverPic').dirty && validateForm.get('showCoverPic').errors">
-        必选
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
@@ -88,9 +76,9 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="content">详细内容</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <app-tiny-editor formControlName="content" name="content" id="content" [editor]="Editor" [config]="config"  [(ngModel)]="obj.content">
+      <!--<app-tiny-editor formControlName="content" name="content" id="content" [editor]="Editor" [config]="config"  [(ngModel)]="obj.content">
 
-      </app-tiny-editor>
+      </app-tiny-editor>-->
      <!-- <ckeditor formControlName="content" name="content" id="content" [editor]="Editor" [config]="config"  [(ngModel)]="obj.content">
       </ckeditor>-->
     </nz-form-control>
@@ -106,27 +94,21 @@
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="needOpenComment">打开评论</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择">
       <nz-radio-group formControlName="needOpenComment" [(ngModel)]="obj.needOpenComment" name="needOpenComment" id="needOpenComment">
         <label nz-radio [nzValue]=false>否</label>
         <label nz-radio [nzValue]=true>是</label>
       </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('needOpenComment').dirty && validateForm.get('needOpenComment').errors">
-        必选
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="onlyFansCanComment">游客评论</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择">
       <nz-radio-group formControlName="onlyFansCanComment" [(ngModel)]="obj.onlyFansCanComment" name="onlyFansCanComment" id="onlyFansCanComment">
         <label nz-radio [nzValue]=false>否</label>
         <label nz-radio [nzValue]=true>是</label>
       </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('onlyFansCanComment').dirty && validateForm.get('onlyFansCanComment').errors">
-        必选
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 

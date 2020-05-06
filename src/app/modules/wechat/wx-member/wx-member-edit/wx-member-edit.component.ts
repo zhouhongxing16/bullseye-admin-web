@@ -21,7 +21,7 @@ export class WxMemberEditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private wxMemberService: WxMemberService,
               private route: ActivatedRoute,
-              private help: Help) {
+              public help: Help) {
   }
 
   ngOnInit() {

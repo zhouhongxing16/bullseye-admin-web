@@ -2,41 +2,29 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请填写名称">
       <input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
-      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="sourceId">sourceId</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写">
       <input nz-input formControlName="sourceId" [(ngModel)]="obj.sourceId" name="sourceId" id="sourceId">
-      <nz-form-explain *ngIf="validateForm.get('sourceId').dirty && validateForm.get('sourceId').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="appId">appId</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写名称">
       <input nz-input formControlName="appId" [(ngModel)]="obj.appId" name="appId" id="appId">
-      <nz-form-explain *ngIf="validateForm.get('appId').dirty && validateForm.get('appId').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="appSecret">appSecret</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写名称">
       <input nz-input  formControlName="appSecret" [(ngModel)]="obj.appSecret" name="appSecret" id="appSecret">
-      <nz-form-explain *ngIf="validateForm.get('appSecret').dirty && validateForm.get('appSecret').errors">
-        必填
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
@@ -63,14 +51,11 @@
 
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24">
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择状态">
       <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status" >
         <label nz-radio [nzValue]="'0'">启用</label>
         <label nz-radio [nzValue]="'1'">禁用</label>
       </nz-radio-group>
-      <nz-form-explain *ngIf="validateForm.get('status').dirty && validateForm.get('status').errors">
-        必选
-      </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 

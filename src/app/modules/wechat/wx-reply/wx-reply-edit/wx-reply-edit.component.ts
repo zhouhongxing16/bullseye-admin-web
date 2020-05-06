@@ -6,7 +6,6 @@ import {WxReplyService} from '../wx-reply.service';
 import {WxReply} from '../wx-reply';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn.js';
 import {WxMaterialService} from '../../wx-material/wx-material.service';
 
 
@@ -18,7 +17,6 @@ import {WxMaterialService} from '../../wx-material/wx-material.service';
 export class WxReplyEditComponent implements OnInit {
   //富文本相关---
   @Input() content;
-  public Editor = ClassicEditor;
 
   @Output() public contentChange = new EventEmitter();
 
