@@ -20,7 +20,7 @@ export class WxMenuListComponent implements OnInit {
   chooseWxSourceId = '';
 
   constructor(private wxMenuService: WxMenuService,
-              private help: Help,
+              public help: Help,
               private wxAccountService: WxAccountService) {
   }
 
