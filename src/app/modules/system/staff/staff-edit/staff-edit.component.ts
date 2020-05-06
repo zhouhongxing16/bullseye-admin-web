@@ -6,7 +6,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {UploadFile} from 'ng-zorro-antd';
-import {Staff} from "../staff";
+import {Staff} from '../staff';
 
 
 @Component({
@@ -17,7 +17,6 @@ import {Staff} from "../staff";
 export class StaffEditComponent implements OnInit {
 
   validateForm: FormGroup;
-  isLoading = false;
   obj: Staff = new Staff();
 
   constructor(
@@ -113,11 +112,11 @@ export class StaffEditComponent implements OnInit {
   }
 
   submitForm() {
-    this.isLoading = true;
+    this.help.isLoading = true;
     this.obj.birthday = this.help.fmtDate(this.obj.birthday, 'yyyy-MM-dd');
     this.obj.joinDate = this.help.fmtDate(this.obj.joinDate, 'yyyy-MM-dd');
     this.staffService.saveOrUpdateData(this.obj).subscribe(res => {
-      this.isLoading = false;
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.help.back();

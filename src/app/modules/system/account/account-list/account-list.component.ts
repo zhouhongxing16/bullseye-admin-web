@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Help} from '../../../../../utils/Help';
 import {AccountService} from '../account.service';
-import {BaseListComponent} from "../../../../components/base-list/base-list.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {BaseListComponent} from '../../../../components/base-list/base-list.component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-account-list',
@@ -17,7 +17,7 @@ export class AccountListComponent extends BaseListComponent<Account> {
 
   accountId = null;
 
-  constructor(private accountService: AccountService, help: Help, route: ActivatedRoute, router: Router) {
+  constructor(private accountService: AccountService, public help: Help, route: ActivatedRoute, router: Router) {
     super(accountService, help, route, router);
   }
 

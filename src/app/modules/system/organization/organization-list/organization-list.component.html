@@ -1,5 +1,5 @@
 <div class="table-operations">
-  <button nz-button nzType="primary" routerLink="../add" *ngIf="initAuth('add')">
+  <button nz-button nzType="primary" routerLink="../add" *ngIf="auth.add">
     <i nz-icon nzType="plus" nzTheme="outline"></i> 添加
   </button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
@@ -9,7 +9,7 @@
   nzShowSizeChanger
   [nzData]="rows"
   [nzScroll]="{x:'100%'}"
-  [nzLoading]="isLoading"
+  [nzLoading]="help.isLoading"
   [nzTotal]="total"
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
@@ -40,9 +40,9 @@
         <i nz-icon nzType="windows" nzTheme="outline"></i>
       </button>
       <button title="修改数据" (click)="goToPage('/organization/edit',{id:data.id,code:authData.authCode})" nz-button
-              nzType="primary" nzShape="circle" *ngIf="initAuth('edit')">
+              nzType="primary" nzShape="circle" *ngIf="auth.edt">
         <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i></button>
-      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="initAuth('delete')"
+      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete||!authData.flag"
               title="修改数据" nz-button nzType="primary" nzShape="circle">
         <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
       </button>
@@ -65,6 +65,6 @@
     (nzExpandChange)="nzEvent($event)"
     (nzCheckBoxChange)="nzEvent($event)">
   </nz-tree>
-  <button nz-button nzType="primary" [nzLoading]="isLoading" (click)="getSelectedNodeList()">保存</button>&nbsp;&nbsp;
-  <button nz-button nzType="dashed" (click)="close()" [nzLoading]="isLoading">取消</button>
+  <button nz-button nzType="primary" [nzLoading]="help.isLoading" (click)="getSelectedNodeList()">保存</button>&nbsp;&nbsp;
+  <button nz-button nzType="dashed" (click)="close()" [nzLoading]="help.isLoading">取消</button>
 </nz-drawer>

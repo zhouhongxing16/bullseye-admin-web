@@ -4,11 +4,11 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { AccountService} from '../account.service';
+import {AccountService} from '../account.service';
 import {Help} from '../../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
-import { Account} from '../Account';
+import {Account} from '../Account';
 import {of} from 'rxjs';
 
 @Component({
@@ -20,14 +20,13 @@ export class AccountEditComponent implements OnInit {
 
 
   validateForm: FormGroup;
-  isLoading = false;
   obj: Account = new Account();
 
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private help: Help) {
+    public help: Help) {
   }
 
   ngOnInit() {
@@ -85,9 +84,9 @@ export class AccountEditComponent implements OnInit {
   }
 
   submitForm() {
-    this.isLoading = true;
+    this.help.loading();
     this.accountService.saveOrUpdateData(this.obj).subscribe(res => {
-      this.isLoading = false;
+      this.help.stopLoad();
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.help.back();

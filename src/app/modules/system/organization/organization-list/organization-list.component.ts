@@ -1,42 +1,36 @@
 import {Component, ViewChild} from '@angular/core';
 import {Help} from '../../../../../utils/Help';
-import {Organization} from '../organization';
 import {OrganizationService} from '../organization.service';
 import {NzFormatEmitEvent, NzTreeComponent} from 'ng-zorro-antd';
 import {MenuService} from '../../menu/menu.service';
-import {BaseListComponent} from "../../../../components/base-list/base-list.component";
-import {Department} from "../../department/department";
-import {ActivatedRoute, Router} from "@angular/router";
+import {BaseListComponent} from '../../../../components/base-list/base-list.component';
+import {Department} from '../../department/department';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-organization-list',
   templateUrl: './organization-list.component.html',
   styleUrls: ['./organization-list.component.scss']
 })
-export class OrganizationListComponent  extends BaseListComponent<Department> {
+export class OrganizationListComponent extends BaseListComponent<Department> {
   @ViewChild('menuAuthTree') menuAuthTree: NzTreeComponent;
-  rows: Organization[] = [];
-  total = 0;
-  pageIndex = 1;
-  pageSize = 10;
-  isLoading = false;
   drawerVisible = false;
   organizationId: string;
   nodes = [];
   selectMenus = [];
   defaultCheckedKeys = [];
   defaultSelectedKeys = [];
-  constructor(private organizationService: OrganizationService,  help: Help,  route: ActivatedRoute, router: Router,private menuService: MenuService) {
-    super(organizationService, help, route, router);
-  }
 
-  ngOnInit() {
-    this.getListByPage();
+  constructor(private organizationService: OrganizationService, help: Help,
+              route: ActivatedRoute, router: Router, private menuService: MenuService) {
+    super(organizationService, help, route, router);
   }
 
   addMenu(organizationId: string): void {
     this.drawerVisible = true;
+    this.help.isLoading = true;
     this.menuService.getOrganizationMenus({organizationId: organizationId}).subscribe(msg => {
+      this.help.isLoading = false;
       if (msg.success) {
         this.organizationId = organizationId;
         this.getCheckedLeafMenus(organizationId);
@@ -69,9 +63,9 @@ export class OrganizationListComponent  extends BaseListComponent<Department> {
   }
 
   saveOrganizationMenus() {
-    this.isLoading = true;
+    this.help.isLoading = true;
     this.organizationService.saveOrganizationMenus(this.selectMenus).subscribe(res => {
-      this.isLoading = false;
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.close();
@@ -104,8 +98,8 @@ export class OrganizationListComponent  extends BaseListComponent<Department> {
     this.organizationService.getCheckedLeafMenus({organizationId: organizationId, isLeaf: true}).subscribe(res => {
       if (res.success) {
         that.defaultCheckedKeys = [];
-        res.data.forEach(function (value) {
-          that.defaultCheckedKeys.push(value.menuId);
+        res.data.forEach(item => {
+          that.defaultCheckedKeys.push(item.menuId);
         });
         console.log(this.defaultCheckedKeys);
       }

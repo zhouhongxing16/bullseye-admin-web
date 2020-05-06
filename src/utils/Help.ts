@@ -9,6 +9,7 @@ import {environment} from '../environments/environment';
 @Injectable()
 export class Help {
   private loadId: any;
+  public isLoading = false;
   public isCollapsed = false;
   public environment = environment;
   constructor(

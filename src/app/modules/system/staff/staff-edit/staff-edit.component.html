@@ -12,7 +12,7 @@
         (nzChange)="handleChange($event)"
       >
         <ng-container *ngIf="!obj.avatar">
-          <i class="upload-icon" nz-icon [type]="isLoading ? 'loading' : 'plus'"></i>
+          <i class="upload-icon" nz-icon [type]="help.isLoading ? 'loading' : 'plus'"></i>
           <div class="ant-upload-text">头像</div>
         </ng-container>
         <img *ngIf="obj.avatar" width="150px" height="150px" [src]="help.environment.SERVER_URL+obj.avatar" class="avatar"/>
@@ -217,8 +217,8 @@
 
   <nz-form-item nz-row style="margin-bottom:8px;">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading" (click)="submitForm()">保存</button>&nbsp;&nbsp;
-      <button nz-button nzType="dashed" (click)="help.back()" [nzLoading]="isLoading">取消</button>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="help.isLoading" (click)="submitForm()">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" (click)="help.back()" [nzLoading]="help.isLoading">取消</button>
     </nz-form-control>
   </nz-form-item>
 </form>

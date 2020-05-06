@@ -4,17 +4,17 @@ import {Help} from '../../../utils/Help';
 import {ActivatedRoute, Router} from '@angular/router';
 
 export class BaseListComponent<T> implements OnInit {
-
+  params: any = {};
   rows: any = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
-  loading = false;
   authData: any = {
     auths: [],
     flag: false,
     authCode: ''
   };
+  auth: any = {};
 
   constructor(public service: BaseService<T>, public help: Help, public route: ActivatedRoute, public router: Router) {
   }
@@ -27,6 +27,7 @@ export class BaseListComponent<T> implements OnInit {
       } else {
         this.authData.flag = true;
         const dec = window.atob(params.code);
+        console.log(dec);
         this.authData.auths = JSON.parse(dec);
       }
       if (!this.help.isEmpty(params.pageSize) && !this.help.isEmpty(params.pageIndex)) {
@@ -35,19 +36,20 @@ export class BaseListComponent<T> implements OnInit {
       }
     });
     this.getListByPage();
+    this.initAuthFlag();
   }
 
   getListByPage(reset: boolean = false) {
     if (reset) {
       this.pageIndex = 1;
     }
-    this.loading = true;
-    this.service.getListByPage(this.pageIndex, this.pageSize, {}).subscribe(data => {
-      this.loading = false;
+    this.help.loading();
+    this.service.getListByPage(this.pageIndex, this.pageSize, this.params).subscribe(data => {
+      this.help.stopLoad();
       this.rows = data.rows;
       this.total = data.total;
     }, err => {
-      this.loading = false;
+      this.help.stopLoad();
       this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
     });
   }
@@ -72,22 +74,10 @@ export class BaseListComponent<T> implements OnInit {
       queryParams: params
     });
   }
-
-  initAuth(code: string) {
-    if(this.authData.auths.length==0){
-      return true
+  initAuthFlag(){
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.authData.auths.length; i++) {
+        this.auth[this.authData.auths[i].code] = true;
     }
-    if (this.authData.flag) {
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.authData.auths.length; i++) {
-        if (this.authData.auths[i].code === code) {
-          return true;
-        }
-      }
-    } else {
-      return false;
-    }
-
-
   }
 }
