@@ -1,16 +1,13 @@
-<ng-container>
+<ul nz-menu nzTheme="dark" nzMode="inline">
+  <ng-container *ngFor="let item of menus">
+    <li *ngIf="item.children!=null" nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon?item.icon:'calendar'">
+      <app-submenu [menus]="item.children"></app-submenu>
+    </li>
 
-  <ul nz-menu nzTheme="dark" nzMode="inline">
-    <ng-container *ngFor="let item of menus">
-      <li *ngIf="item.children!=null" nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon?item.icon:'calendar'">
-        <app-submenu [menus]="item.children"></app-submenu>
-      </li>
-
-      <li *ngIf="item.children==null" (click)="goToPage(item)" nz-menu-item>
-        <i nz-icon [nzType]="item.icon?item.icon:'calendar'"></i>
-        <span>{{item.title}}</span>
-      </li>
-    </ng-container>
-  </ul>
-</ng-container>
+    <li *ngIf="item.children==null" (click)="goToPage(item)" nz-menu-item>
+      <i nz-icon [nzType]="item.icon?item.icon:'calendar'"></i>
+      <span>{{item.title}}</span>
+    </li>
+  </ng-container>
+</ul>
 

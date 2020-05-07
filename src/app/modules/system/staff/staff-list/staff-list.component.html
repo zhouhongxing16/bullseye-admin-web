@@ -1,9 +1,25 @@
-<div class="table-operations">
-  <button nz-button nzType="primary" routerLink="../add" *ngIf="auth.add">
-    <i nz-icon nzType="plus" nzTheme="outline"></i> 添加
-  </button>&nbsp;&nbsp;
-  <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+
+<div class="table-operations" nz-row="24">
+  <div nz-col nzSpan="8">
+    <button nz-button nzType="primary"  (click)="goToPage('/staff/edit',{code:authData.authCode})" *ngIf="auth.add">
+      <i nz-icon nzType="plus" nzTheme="outline"></i> 添加
+    </button>&nbsp;&nbsp;
+    <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+  </div>
+  <div nz-col nzSpan="16">
+    <div class="searchWidth">
+      <nz-input-group nzSearch nzSize="default" [nzAddOnAfter]="suffixButton">
+        <input type="text" [(ngModel)]="params.keyword" (keyup.enter)="search($event,true)"
+               (ngModelChange)="search($event,false)" nz-input placeholder="名称"/>
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button (click)="search($event,true)" nz-button nzType="primary" nzSize="default" nzSearch>搜索</button>
+      </ng-template>
+    </div>
+  </div>
 </div>
+
+<nz-divider nzText="员工管理"></nz-divider>
 <nz-table
   #staffTable
   nzShowSizeChanger

@@ -100,6 +100,7 @@ export class StaffEditComponent implements OnInit {
         break;
       case 'done':
         this.help.stopLoad();
+        // tslint:disable-next-line:no-non-null-assertion
         this.help.getBase64(info.file!.originFileObj!, (img: string) => {
           this.obj.avatar = info.file.response.data.fullFilePath;
         });

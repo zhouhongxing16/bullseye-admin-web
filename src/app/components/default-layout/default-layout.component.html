@@ -1,54 +1,53 @@
-<nz-layout style="height: 100%">
-  <nz-sider nzCollapsible [(nzCollapsed)]="help.isCollapsed" [nzTrigger]="triggerTemplate">
+<nz-layout class="layout">
+  <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0" style="padding-bottom: 15px">
+    <!--  <nz-sider nzCollapsible [(nzCollapsed)]="help.isCollapsed" [nzTrigger]="null">-->
     <div class="logo"><img class="logo-img" src="assets/images/logo.png" alt=""></div>
     <app-menu [menus]="menus"></app-menu>
   </nz-sider>
-  <nz-layout>
+  <nz-layout class="right-layout">
     <nz-header class="bullseye-header">
-      <i
-        class="trigger"
-        nz-icon
-        [nzType]="help.isCollapsed ? 'menu-unfold' : 'menu-fold'"
-        (click)="help.isCollapsed = !help.isCollapsed"
-      ></i>
+      <!--      <i class="trigger" nz-icon [nzType]="help.isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="help.isCollapsed = !help.isCollapsed"></i>-->
+
       <div style="float: right;margin-right: 1%">
         <a nz-dropdown [nzDropdownMenu]="menu">
-            {{userInfo.name}}
+          {{userInfo.name}}
           <nz-avatar [nzSrc]="help.environment.SERVER_URL+userInfo.avatar"></nz-avatar>
         </a>
-          <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu nzSelectable>
-              <li nz-menu-item>
-                <a (click)="goToProfile()">个人信息</a>
-              </li>
-              <li nz-menu-item>
-                <a (click)="showChangePasswordModal()">修改密码</a>
-              </li>
-              <li nz-menu-divider></li>
-              <li nz-menu-item (click)="showLogoutConfirm()">退出</li>
-            </ul>
-          </nz-dropdown-menu>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <li nz-menu-item>
+              <a (click)="goToProfile()">个人信息</a>
+            </li>
+            <li nz-menu-item>
+              <a (click)="showChangePasswordModal()">修改密码</a>
+            </li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item (click)="showLogoutConfirm()">退出</li>
+          </ul>
+        </nz-dropdown-menu>
       </div>
     </nz-header>
-    <nz-content style="margin:0 16px;">
-      <nz-breadcrumb style="margin:16px 0;">
+    <nz-content>
+      <nz-breadcrumb>
         <nz-breadcrumb-item>User</nz-breadcrumb-item>
         <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div style="padding:24px; background: #fff; min-height: 80%;">
+      <div class="inner-content">
         <router-outlet></router-outlet>
       </div>
-      <nz-footer style="text-align: center;"><a href="http://www.zhouhongxing.cn">Bulleye Admin ©2020 By Bulleye</a></nz-footer>
+      <nz-footer><a href="http://www.zhouhongxing.cn">Bulleye Admin ©2020 By Bulleye</a></nz-footer>
     </nz-content>
 
-<!--    修改密码modal-->
-    <nz-modal nzMaskClosable="false" [(nzVisible)]="passwordChangeModalFalse" nzTitle="修改密码" (nzOnCancel)="closeModal()" (nzOnOk)="submitPasswordForm()">
+    <!--    修改密码modal-->
+    <nz-modal nzMaskClosable="false" [(nzVisible)]="passwordChangeModalFalse" nzTitle="修改密码" (nzOnCancel)="closeModal()"
+              (nzOnOk)="submitPasswordForm()">
       <form nz-form [formGroup]="validatePasswordForm">
 
         <nz-form-item>
           <nz-form-label [nzSpan]="6" nzRequired nzFor="oldPassword">旧密码</nz-form-label>
           <nz-form-control [nzSpan]="16" nzErrorTip="请输入旧密码">
-            <input type="password" [(ngModel)]="password.oldPassword" nz-input formControlName="oldPassword" placeholder="请输入旧密码" />
+            <input type="password" [(ngModel)]="password.oldPassword" nz-input formControlName="oldPassword"
+                   placeholder="请输入旧密码"/>
 
           </nz-form-control>
         </nz-form-item>
@@ -56,14 +55,16 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="6" nzRequired nzFor="newPassword">新密码</nz-form-label>
           <nz-form-control [nzSpan]="16" nzErrorTip="请输入新密码">
-            <input type="password" [(ngModel)]="password.newPassword" nz-input formControlName="newPassword" placeholder="请输入新密码" />
+            <input type="password" [(ngModel)]="password.newPassword" nz-input formControlName="newPassword"
+                   placeholder="请输入新密码"/>
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
           <nz-form-label [nzSpan]="6" nzRequired nzFor="confirmPassword">确认新密码</nz-form-label>
           <nz-form-control [nzSpan]="16" nzErrorTip="必须与新密码相同">
-            <input type="password" [(ngModel)]="password.confirmPassword" nz-input formControlName="confirmPassword" placeholder="请输入新密码" />
+            <input type="password" [(ngModel)]="password.confirmPassword" nz-input formControlName="confirmPassword"
+                   placeholder="请输入新密码"/>
           </nz-form-control>
         </nz-form-item>
 

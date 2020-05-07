@@ -4,11 +4,14 @@ import {Help} from '../../../utils/Help';
 import {ActivatedRoute, Router} from '@angular/router';
 
 export class BaseListComponent<T> implements OnInit {
-  params: any = {};
+  params: any = {
+    keyword: ''
+  };
   rows: any = [];
   total = 0;
   pageIndex = 1;
   pageSize = 10;
+  timeOut: any;
   authData: any = {
     auths: [],
     flag: false,
@@ -37,6 +40,21 @@ export class BaseListComponent<T> implements OnInit {
     });
     this.getListByPage();
     this.initAuthFlag();
+  }
+
+  search(event: any, click: boolean) {
+
+    const that = this;
+    if (!click) {
+      if ( !this.help.isEmpty(this.params.keyword)) {
+        clearTimeout(this.timeOut);
+        this.timeOut = setTimeout(() => {
+          that.getListByPage(false);
+        }, 1500);
+      }
+    } else {
+      that.getListByPage(false);
+    }
   }
 
   getListByPage(reset: boolean = false) {
