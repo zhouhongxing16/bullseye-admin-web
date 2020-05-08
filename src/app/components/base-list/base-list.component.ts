@@ -23,6 +23,11 @@ export class BaseListComponent<T> implements OnInit {
   }
 
   ngOnInit() {
+    this.initAuthData();
+    this.getListByPage();
+  }
+
+  initAuthData() {
     this.route.queryParams.subscribe(params => {
       this.authData.authCode = params.code;
       if (this.help.isEmpty(params.code)) {
@@ -38,7 +43,6 @@ export class BaseListComponent<T> implements OnInit {
         this.pageIndex = params.pageIndex;
       }
     });
-    this.getListByPage();
     this.initAuthFlag();
   }
 
@@ -46,7 +50,7 @@ export class BaseListComponent<T> implements OnInit {
 
     const that = this;
     if (!click) {
-      if ( !this.help.isEmpty(this.params.keyword)) {
+      if (!this.help.isEmpty(this.params.keyword)) {
         clearTimeout(this.timeOut);
         this.timeOut = setTimeout(() => {
           that.getListByPage(false);
@@ -92,10 +96,11 @@ export class BaseListComponent<T> implements OnInit {
       queryParams: params
     });
   }
-  initAuthFlag(){
+
+  initAuthFlag() {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.authData.auths.length; i++) {
-        this.auth[this.authData.auths[i].code] = true;
+      this.auth[this.authData.auths[i].code] = true;
     }
   }
 }

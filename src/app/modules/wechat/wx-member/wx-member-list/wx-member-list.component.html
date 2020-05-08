@@ -1,5 +1,5 @@
 <div class="table-operations">
-  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="params.sourceId" nzAllowClear nzPlaceHolder="Choose"
              (ngModelChange)="getListByPage(true)">
     <ng-container *ngFor="let item of wxAccounts">
       <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>

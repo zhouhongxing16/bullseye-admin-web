@@ -16,7 +16,6 @@ import {WxMaterialService} from '../../wx-material/wx-material.service';
 export class WxMenuEditComponent implements OnInit {
 
   validateForm: FormGroup;
-  isLoading = false;
   obj: WxMenu = new WxMenu();
   type: string;
   wxMaterialList;
@@ -25,7 +24,7 @@ export class WxMenuEditComponent implements OnInit {
               private wxMenuService: WxMenuService,
               private wxMaterialService: WxMaterialService,
               private route: ActivatedRoute,
-              private help: Help) {
+              public help: Help) {
   }
 
   ngOnInit() {
@@ -39,15 +38,15 @@ export class WxMenuEditComponent implements OnInit {
         }
       })
     ).subscribe(d => {
-      if (this.type == 'addOne') {
+      if (this.type === 'addOne') {
         this.obj = new WxMenu();
         this.obj.parentId = '0';
         this.obj.sourceId = this.route.snapshot.queryParams['sourceId'];
-      } else if (this.type == 'addTwo') {
+      } else if (this.type === 'addTwo') {
         this.obj = new WxMenu();
         this.obj.parentId = d.data.id;
         this.obj.sourceId = d.data.sourceId;
-      } else if (this.type == 'edit') {
+      } else if (this.type === 'edit') {
         this.obj = d.data;
       }
       console.log(this.obj);
@@ -70,17 +69,17 @@ export class WxMenuEditComponent implements OnInit {
     });
   }
 
-  getMediaId (){
-    this.wxMaterialService.getEverMaterialBySourceId(this.obj.sourceId).subscribe(res =>{
-      this.wxMaterialList = res
-      console.log(res)
-    })
+  getMediaId() {
+    this.wxMaterialService.getEverMaterialBySourceId(this.obj.sourceId).subscribe(res => {
+      this.wxMaterialList = res;
+      console.log(res);
+    });
   }
 
   submitForm() {
-    this.isLoading = true;
+    this.help.loading();
     this.wxMenuService.saveOrUpdateData(this.obj).subscribe(res => {
-      this.isLoading = false;
+      this.help.stopLoad();
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.help.back();
