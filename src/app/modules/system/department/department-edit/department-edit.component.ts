@@ -16,7 +16,6 @@ export class DepartmentEditComponent implements OnInit {
 
   pageParams: any;
   validateForm: FormGroup;
-  isLoading = false;
   obj: Department = new Department();
 
   constructor(
@@ -70,9 +69,9 @@ export class DepartmentEditComponent implements OnInit {
   }
 
   submitForm() {
-    this.isLoading = true;
+    this.help.isLoading = true;
     this.departmentService.saveOrUpdateData(this.obj).subscribe(res => {
-      this.isLoading = false;
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.help.goToPage('/department/list', this.pageParams);

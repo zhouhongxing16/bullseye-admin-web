@@ -1,7 +1,7 @@
 
 <div class="table-operations" nz-row="24">
   <div nz-col nzSpan="8">
-    <button nz-button nzType="primary"  (click)="goToPage('/staff/edit',{code:authData.authCode})" *ngIf="auth.add">
+    <button nz-button nzType="primary"  (click)="goToPage('/staff/edit',{code:authData.authCode})" *ngIf="auth.create">
       <i nz-icon nzType="plus" nzTheme="outline"></i> 添加
     </button>&nbsp;&nbsp;
     <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
@@ -20,6 +20,7 @@
 </div>
 
 <nz-divider nzText="员工管理"></nz-divider>
+
 <nz-table
   #staffTable
   nzShowSizeChanger

@@ -65,13 +65,13 @@ export class BaseListComponent<T> implements OnInit {
     if (reset) {
       this.pageIndex = 1;
     }
-    this.help.loading();
+    this.help.isLoading = true;
     this.service.getListByPage(this.pageIndex, this.pageSize, this.params).subscribe(data => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       this.rows = data.rows;
       this.total = data.total;
     }, err => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
     });
   }
@@ -80,7 +80,7 @@ export class BaseListComponent<T> implements OnInit {
     this.help.loading('删除中...');
     this.service.deleteById(id).subscribe(res => {
       if (res.success) {
-        this.help.stopLoad();
+        this.help.isLoading = false;
         this.help.showMessage('success', res.message);
         this.getListByPage(true);
       } else {

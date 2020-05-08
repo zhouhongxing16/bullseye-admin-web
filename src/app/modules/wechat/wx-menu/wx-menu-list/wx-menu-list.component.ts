@@ -45,15 +45,15 @@ export class WxMenuListComponent extends BaseListComponent<WxMenu> {
   getWxMenu(sourceId: string) {
     if (sourceId) {
       this.chooseWxSourceId = sourceId;
-      this.help.loading();
+      this.help.isLoading = true;
       this.wxMenuService.getWxMenu(sourceId).subscribe(data => {
-        this.help.stopLoad();
+        this.help.isLoading = false;
         this.rows = data.wxMenu;
         this.rows.forEach(item => {
           this.mapOfExpandedData[item.id] = this.convertTreeToList(item);
         });
       }, err => {
-        this.help.stopLoad();
+        this.help.isLoading = false;
         this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
       });
     }
@@ -104,7 +104,7 @@ export class WxMenuListComponent extends BaseListComponent<WxMenu> {
     this.help.loading('删除中...');
     this.wxMenuService.deleteById(id).subscribe(res => {
       if (res.success) {
-        this.help.stopLoad();
+        this.help.isLoading = false;
         this.help.showMessage('success', res.message);
         this.getWxMenu(this.chooseWxSourceId);
       } else {
@@ -114,11 +114,11 @@ export class WxMenuListComponent extends BaseListComponent<WxMenu> {
   }
 
   createWxMenu() {
-    this.help.loading();
+    this.help.isLoading = true;
     this.wxMenuService.createWxMenu(this.chooseWxSourceId).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
-        this.help.stopLoad();
+        this.help.isLoading = false;
         this.help.showMessage('success', res.message);
         this.getWxMenu(this.chooseWxSourceId);
       } else {

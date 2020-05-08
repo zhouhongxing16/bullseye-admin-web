@@ -26,8 +26,8 @@ export class MonitorListComponent implements OnInit {
   getInfo() {
     this.help.loading('获取中...');
     this.service.getInfo().subscribe(res => {
+      this.help.stopLoad();
       if (res.success) {
-        this.help.stopLoad();
         this.cpu = res.data.cpu;
         this.mem = res.data.mem;
         this.jvm = res.data.jvm;
@@ -35,7 +35,6 @@ export class MonitorListComponent implements OnInit {
         this.sysFiles = res.data.sysFiles;
         this.help.showMessage('success', res.message);
       } else {
-        this.help.stopLoad();
         this.help.showMessage('error', res.message);
       }
     });

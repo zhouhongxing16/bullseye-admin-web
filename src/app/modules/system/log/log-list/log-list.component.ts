@@ -42,7 +42,7 @@ export class LogListComponent implements OnInit {
     this.help.loading('删除中...');
     this.logService.deleteById(id).subscribe(res => {
       if (res.success) {
-        this.help.stopLoad();
+        this.help.isLoading = false;
         this.help.showMessage('success', res.message);
         this.getListByPage(true);
       } else {

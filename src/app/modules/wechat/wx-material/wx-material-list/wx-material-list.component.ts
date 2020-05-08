@@ -60,7 +60,7 @@ export class WxMaterialListComponent extends BaseListComponent<WxMaterial> {
   UploadRow(id: string) {
     this.help.loading('上传中...');
     this.wxMaterialService.materialUpload(id).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
       } else {
@@ -72,7 +72,7 @@ export class WxMaterialListComponent extends BaseListComponent<WxMaterial> {
   unUploadRow(id: string) {
     this.help.loading('正在删除...');
     this.wxMaterialService.materialDelete(id).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
       } else {
@@ -84,7 +84,7 @@ export class WxMaterialListComponent extends BaseListComponent<WxMaterial> {
   PubRow(id: string) {
     this.help.loading('推送中...');
     this.wxMaterialService.pubMaterialToUser(id).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
       } else {

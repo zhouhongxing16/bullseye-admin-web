@@ -18,7 +18,6 @@ export class StatusPipe implements PipeTransform {
         result = ``;
         break;
     }
-    console.log(result);
     return  result;
   }
 }

@@ -9,7 +9,9 @@ import {Help} from '../../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {Account} from '../Account';
-import {of} from 'rxjs';
+import {BehaviorSubject, of} from 'rxjs';
+import {StaffService} from '../../staff/staff.service';
+import {Staff} from '../../staff/staff';
 
 @Component({
   selector: 'app-account-edit',
@@ -18,18 +20,28 @@ import {of} from 'rxjs';
 })
 export class AccountEditComponent implements OnInit {
 
-
+  pageParams: any;
   validateForm: FormGroup;
   obj: Account = new Account();
+  staffList: Staff[] = [];
+  tempStaffList: Staff[];
+
+  staffPageIndex = 1;
+  staffPageSize = 10;
+  staffParams: any = {};
 
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private route: ActivatedRoute,
+    private staffService: StaffService,
     public help: Help) {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.pageParams = params;
+    });
     this.route.queryParamMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
@@ -81,12 +93,39 @@ export class AccountEditComponent implements OnInit {
       expiredDate: [null, null],
 
     });
+
+
+  }
+
+  searchChange$ = new BehaviorSubject('');
+
+  onSearch(value: string): void {
+    this.staffParams.keyword = value;
+    this.staffList = [];
+    this.getStaffListByPage(true);
+    this.searchChange$.next(value);
+  }
+
+  getStaffListByPage(reset: boolean = false) {
+    this.tempStaffList = [];
+    if (reset) {
+      this.staffPageIndex = 1;
+    }
+    this.help.isLoading = true;
+    this.staffService.getListByPage(this.staffPageIndex, this.staffPageSize, this.staffParams).subscribe(data => {
+      this.help.isLoading = false;
+      this.staffPageIndex = this.staffPageIndex + 1;
+      this.staffList = [...this.staffList, ...data.rows];
+    }, err => {
+      this.help.isLoading = false;
+      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
+    });
   }
 
   submitForm() {
-    this.help.loading();
+    this.help.isLoading = true;
     this.accountService.saveOrUpdateData(this.obj).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.help.back();

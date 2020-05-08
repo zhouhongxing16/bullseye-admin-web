@@ -2,6 +2,8 @@
   <!--  <button nz-button nzType="primary" routerLink="../add"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
     <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>-->
 </div>
+
+<nz-divider nzText="日志管理"></nz-divider>
 <nz-table
   #logTable
   nzShowSizeChanger
@@ -63,10 +65,9 @@
 
     <td><div  [innerHTML]="data.status | status"></div></td>
     <td>
-      <nz-popconfirm [nzTitle]="'确定删除吗?'">
-        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle">
-          <i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i></button>
-      </nz-popconfirm>
+        <button  nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" nz-button nzType="primary" nzShape="circle">
+          <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
+        </button>
     </td>
   </tr>
   </tbody>

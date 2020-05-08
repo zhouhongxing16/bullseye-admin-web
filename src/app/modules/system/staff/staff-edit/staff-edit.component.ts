@@ -96,10 +96,10 @@ export class StaffEditComponent implements OnInit {
   handleChange(info: { file: UploadFile }): void {
     switch (info.file.status) {
       case 'uploading':
-        this.help.loading();
+        this.help.isLoading = true;
         break;
       case 'done':
-        this.help.stopLoad();
+        this.help.isLoading = false;
         // tslint:disable-next-line:no-non-null-assertion
         this.help.getBase64(info.file!.originFileObj!, (img: string) => {
           this.obj.avatar = info.file.response.data.fullFilePath;
@@ -107,7 +107,7 @@ export class StaffEditComponent implements OnInit {
         break;
       case 'error':
         this.help.showMessage('error', '网络错误！');
-        this.help.stopLoad();
+        this.help.isLoading = false;
         break;
     }
   }

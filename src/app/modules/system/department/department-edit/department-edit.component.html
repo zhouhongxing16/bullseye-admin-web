@@ -49,9 +49,9 @@
 
   <nz-form-item nz-row style="margin-bottom:8px;">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="help.isLoading">保存</button>&nbsp;&nbsp;
       <button nz-button nzType="dashed" (click)="help.goToPage('/department/list',this.pageParams)"
-              [nzLoading]="isLoading">取消
+              [nzLoading]="help.isLoading">取消
       </button>
     </nz-form-control>
   </nz-form-item>

@@ -33,8 +33,8 @@
   <div class="wrap">
     <div class="top">
       <div class="head">
-        <img class="logo" src="./assets/logo-color.svg"/>
-        <span class="title">BullEye-Admin</span>
+        <img class="logo" src="././assets/images/logo.png"/>
+<!--        <span class="title">BullEye-Admin</span>-->
       </div>
       <div class="desc">武林中最有影响力的《葵花宝典》；欲练神功，挥刀自宫</div>
     </div>
@@ -44,46 +44,39 @@
         <nz-tab [nzTitle]="'账号密码登录'" (nzClick)="requiredChange('account')">
           <!--      <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg"></nz-alert>-->
           <nz-form-item>
-            <nz-form-control>
-              <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+            <nz-form-control nzErrorTip="请输入用户名">
+              <nz-input-group nzSize="large"  [nzPrefix]="prefixTemplateUser">
                 <input nz-input formControlName="username" placeholder="用户名">
               </nz-input-group>
-              <!--<nz-form-explain *ngIf="validateForm.get('username')?.dirty && validateForm.get('username')?.errors">
-                请输入用户名!
-              </nz-form-explain>-->
+              <ng-template #prefixTemplateUser><i nz-icon nzType="user"></i></ng-template>
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-control>
-              <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
+            <nz-form-control nzErrorTip="请输入密码！">
+              <nz-input-group nzSize="large" [nzPrefix]="prefixTemplatePWD">
                 <input nz-input type="password" formControlName="password" placeholder="密码">
               </nz-input-group>
-              <!--<nz-form-explain *ngIf="validateForm.get('password')?.dirty && validateForm.get('password')?.errors">
-                请输入密码!
-              </nz-form-explain>-->
+              <ng-template #prefixTemplatePWD><i nz-icon nzType="lock"></i></ng-template>
             </nz-form-control>
           </nz-form-item>
         </nz-tab>
         <nz-tab [nzTitle]="'手机号登录'" (nzClick)="requiredChange('phone')">
           <nz-form-item>
-            <nz-form-control>
-              <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+            <nz-form-control nzErrorTip="请输入手机号!">
+              <nz-input-group nzSize="large" [nzPrefix]="prefixTemplateUser">
                 <input nz-input formControlName="mobile" placeholder="手机号">
               </nz-input-group>
-              <!--<nz-form-explain *ngIf="validateForm.get('mobile')?.dirty && validateForm.get('mobile')?.errors">请输入手机号!
-              </nz-form-explain>-->
+              <ng-template #prefixTemplateUser><i nz-icon nzType="user"></i></ng-template>
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-control>
+            <nz-form-control nzErrorTip=" 请输入验证码!" >
               <nz-row [nzGutter]="8">
                 <nz-col [nzSpan]="16">
-                  <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-mail">
+                  <nz-input-group nzSize="large" [nzPrefix]="prefixTemplateCode">
                     <input nz-input formControlName="captcha" placeholder="验证码">
                   </nz-input-group>
-                <!--  <nz-form-explain *ngIf="validateForm.get('captcha')?.dirty && validateForm.get('captcha')?.errors">
-                    请输入验证码!
-                  </nz-form-explain>-->
+                  <ng-template #prefixTemplateCode><i nz-icon nzType="mail"></i></ng-template>
                 </nz-col>
                 <nz-col [nzSpan]="8">
                   <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count" nzBlock>

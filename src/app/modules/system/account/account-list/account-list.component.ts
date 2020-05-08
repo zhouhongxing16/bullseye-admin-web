@@ -32,7 +32,7 @@ export class AccountListComponent extends BaseListComponent<Account> {
       roleIds: this.listOfSelectedRole.join(','),
       accountId: this.accountId
     }).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.drawerVisible = false;
@@ -56,9 +56,9 @@ export class AccountListComponent extends BaseListComponent<Account> {
   getAllRoles() {
     const that = this;
     this.drawerVisible = true;
-    this.help.loading('加载中...');
+    this.help.isLoading = true;
     this.accountService.getAllRoles(null).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
         that.roles = [];
         that.roles = res.data;

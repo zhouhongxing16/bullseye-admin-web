@@ -164,7 +164,7 @@ export class MenuListComponent implements OnInit {
     /*this.help.loading('删除中...');
     this.service.deleteById(id).subscribe(res => {
       if (res.success) {
-        this.help.stopLoad();
+        this.help.isLoading = false;
         this.help.showMessage('success', res.message);
         this.getListByPage(true);
       } else {

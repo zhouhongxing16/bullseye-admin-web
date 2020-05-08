@@ -6,6 +6,7 @@ import {NzFormatEmitEvent, NzTreeComponent} from 'ng-zorro-antd';
 import {RoleMenuAuthService} from '../../role-menu-auth/role-menu-auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseListComponent} from '../../../../components/base-list/base-list.component';
+import {StaffService} from '../../staff/staff.service';
 
 @Component({
   selector: 'app-role-list',
@@ -16,7 +17,6 @@ export class RoleListComponent extends BaseListComponent<Role> {
 
   @ViewChild('roleMenuAuthTree') roleMenuAuthTree: NzTreeComponent;
   @ViewChild('roleMenuFunctionTree') roleMenuFunctionTree: NzTreeComponent;
-  rows: Role[] = [];
   visible = false;
   roleId: string;
   menuNodes = [];
@@ -112,7 +112,6 @@ export class RoleListComponent extends BaseListComponent<Role> {
   }
 
   nzEvent(event: NzFormatEmitEvent): void {
-    console.log(event);
   }
 
   // 打开角色功能授权页面
@@ -146,8 +145,8 @@ export class RoleListComponent extends BaseListComponent<Role> {
   }
 
   getSelectedMenuAuthNodeList() {
-    const selectMenuAuthNodes = this.roleMenuFunctionTree.getCheckedNodeList();
-    console.log(this.selectMenuAuthMenus);
+    const selectMenuAuthNodes = this.roleMenuFunctionTree.nzTreeService.checkedNodeList;
+    console.log(selectMenuAuthNodes);
     this.getChildMenuAuthLeafNode(selectMenuAuthNodes);
     console.log(this.selectMenuAuthMenus);
     this.saveRoleMenuAuth();
@@ -155,7 +154,7 @@ export class RoleListComponent extends BaseListComponent<Role> {
 
   // 递归获取菜单功能授权叶子节点
   getChildMenuAuthLeafNode(nodes: any) {
-    console.log(nodes);
+    this.selectMenuAuthMenus = [];
     nodes.forEach(node => {
       if (node.isLeaf && node.origin.type === 'menuAuth') {
         this.selectMenuAuthMenus.push({
@@ -178,6 +177,8 @@ export class RoleListComponent extends BaseListComponent<Role> {
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.close();
+      }else{
+        this.help.showMessage('error', res.message);
       }
     });
   }

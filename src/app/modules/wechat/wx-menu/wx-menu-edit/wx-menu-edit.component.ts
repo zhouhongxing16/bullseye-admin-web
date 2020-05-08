@@ -77,9 +77,9 @@ export class WxMenuEditComponent implements OnInit {
   }
 
   submitForm() {
-    this.help.loading();
+    this.help.isLoading = true;
     this.wxMenuService.saveOrUpdateData(this.obj).subscribe(res => {
-      this.help.stopLoad();
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.help.back();
