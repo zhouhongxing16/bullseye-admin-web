@@ -9,7 +9,7 @@
   nzShowSizeChanger
   [nzData]="rows"
   [nzScroll]="{x:'100%'}"
-  [nzLoading]="loading"
+  [nzLoading]="help.isLoading"
   [nzTotal]="total"
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
@@ -65,7 +65,7 @@
 
     <td><div  [innerHTML]="data.status | status"></div></td>
     <td>
-        <button  nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" nz-button nzType="primary" nzShape="circle">
+        <button  nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" nz-button nzType="primary" nzShape="circle" *ngIf="auth.delete">
           <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
         </button>
     </td>

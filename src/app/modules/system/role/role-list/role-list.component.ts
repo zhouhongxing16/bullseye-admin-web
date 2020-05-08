@@ -146,16 +146,15 @@ export class RoleListComponent extends BaseListComponent<Role> {
 
   getSelectedMenuAuthNodeList() {
     const selectMenuAuthNodes = this.roleMenuFunctionTree.nzTreeService.checkedNodeList;
-    console.log(selectMenuAuthNodes);
+
     this.getChildMenuAuthLeafNode(selectMenuAuthNodes);
-    console.log(this.selectMenuAuthMenus);
     this.saveRoleMenuAuth();
   }
 
   // 递归获取菜单功能授权叶子节点
   getChildMenuAuthLeafNode(nodes: any) {
     this.selectMenuAuthMenus = [];
-    nodes.forEach(node => {
+    nodes.forEach((node,index) => {
       if (node.isLeaf && node.origin.type === 'menuAuth') {
         this.selectMenuAuthMenus.push({
           roleId: this.roleId,
@@ -163,10 +162,11 @@ export class RoleListComponent extends BaseListComponent<Role> {
           status: 1,
           isLeaf: node.isLeaf
         });
+        console.log(index)
       }
-      if (!node.isLeaf && node.children.length > 0) {
+      /*if (!node.isLeaf && node.children.length > 0) {
         this.getChildMenuAuthLeafNode(node.children);
-      }
+      }*/
     });
   }
 
