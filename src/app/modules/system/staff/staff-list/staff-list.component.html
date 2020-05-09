@@ -35,12 +35,12 @@
   (nzPageSizeChange)="getListByPage(true)">
   <thead nzSingleSort>
   <tr>
-    <th nzShowSort nzSortKey="name">姓名</th>
-    <th nzShowSort nzSortKey="serialNo">编号</th>
-    <th nzShowSort nzSortKey="mobile">电话</th>
-    <th nzShowFilter>性别</th>
-    <th nzShowSort nzSortKey="email"><span>Email</span></th>
-    <th><span>操作</span></th>
+    <th>姓名</th>
+    <th>编号</th>
+    <th>电话</th>
+    <th>性别</th>
+    <th>Email</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
@@ -52,7 +52,7 @@
     <td>{{data.email}}</td>
     <td>
       <button title="修改数据" (click)="goToPage('/staff/edit',{id:data.id,code:authData.authCode})" nz-button
-              nzType="primary" nzShape="circle" *ngIf="auth.edit">
+              nzType="primary" nzShape="circle" *ngIf="auth.update">
         <i nz-icon nzType="edit" nzTheme="outline"></i>
       </button>
       <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete"

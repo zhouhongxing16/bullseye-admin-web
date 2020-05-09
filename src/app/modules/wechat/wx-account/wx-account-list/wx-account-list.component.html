@@ -54,7 +54,7 @@
     <td>{{data.created}}</td>
     <td>
       <button title="修改数据" (click)="goToPage('/wxaccount/edit',{id:data.id,code:authData.authCode})" nz-button
-              nzType="primary" nzShape="circle" *ngIf="auth.edit">
+              nzType="primary" nzShape="circle" *ngIf="auth.update">
         <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i></button>
       <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete"
               title="删除数据" nz-button nzType="primary" nzShape="circle">

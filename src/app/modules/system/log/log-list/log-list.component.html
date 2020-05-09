@@ -7,6 +7,7 @@
 <nz-table
   #logTable
   nzShowSizeChanger
+  nzTableLayout="fixed"
   [nzData]="rows"
   [nzScroll]="{x:'100%'}"
   [nzLoading]="help.isLoading"
@@ -16,28 +17,28 @@
   [nzFrontPagination]="false"
   (nzPageIndexChange)="getListByPage()"
   (nzPageSizeChange)="getListByPage(true)">
-  <thead nzSingleSort>
+  <thead>
   <tr>
 
-    <th nzShowSort nzSortKey="organizationId" [nzWidth]="100">所属组织</th>
+    <th [nzWidth]="100">所属组织</th>
 
-    <th nzShowSort nzSortKey="optionName">操作类</th>
+    <th>操作类</th>
 
-    <th nzShowSort nzSortKey="optionType">操作方法名</th>
+    <th>操作方法名</th>
 
-    <!--<th nzShowSort nzSortKey="method">操作方法</th>-->
+    <th>操作方法</th>
 
-    <th nzShowSort nzSortKey="params">参数</th>
+    <th>参数</th>
 
-    <th nzShowSort nzSortKey="userId">操作人</th>
+    <th>操作人</th>
 
-    <th nzShowSort nzSortKey="ip">IP</th>
+    <th>IP</th>
 
-    <th nzShowSort nzSortKey="executionTime">执行时长(ms)</th>
+    <th>执行时长(ms)</th>
 
-    <th nzShowSort nzSortKey="created">操作时间</th>
+    <th>操作时间</th>
 
-    <th nzShowSort nzSortKey="status">状态</th>
+    <th>状态</th>
 
     <th><span>操作</span></th>
   </tr>
@@ -51,7 +52,7 @@
 
     <td>{{data.optionType}}</td>
 
-    <!--<td style="max-width: 5%">{{data.method}}</td>-->
+    <td>{{data.method}}</td>
 
     <td>{{data.params}}</td>
 

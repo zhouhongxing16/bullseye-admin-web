@@ -49,7 +49,7 @@ export class DepartmentEditComponent implements OnInit {
 
       id: [null, null],
 
-      organizationId: [null, [Validators.required]],
+      organizationId: [null, null],
 
       code: [null, [Validators.required]],
 

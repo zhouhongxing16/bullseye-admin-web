@@ -36,12 +36,12 @@
   (nzPageSizeChange)="getListByPage(true)">
   <thead nzSingleSort>
   <tr>
-    <th nzShowSort nzSortKey="name">用户名</th>
-    <th nzShowSort nzSortKey="email">邮箱</th>
-    <th nzShowSort nzSortKey="accountLocked">是否锁定</th>
-    <th nzShowSort nzSortKey="status"><span>状态</span></th>
-    <th nzShowSort nzSortKey="created">创建时间</th>
-    <th><span>操作</span></th>
+    <th>用户名</th>
+    <th>邮箱</th>
+    <th>是否锁定</th>
+    <th>状态</th>
+    <th>创建时间</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
@@ -56,7 +56,7 @@
         <i nz-icon nzType="team" nzTheme="outline"></i>
       </button>
       <button title="修改数据" (click)="goToPage('/account/edit',{id:data.id,code:authData.authCode})" nz-button
-              nzType="primary" nzShape="circle" *ngIf="auth.edit">
+              nzType="primary" nzShape="circle" *ngIf="auth.update">
         <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i></button>
       <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete"
               title="删除数据" nz-button nzType="primary" nzShape="circle">
