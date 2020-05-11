@@ -1,16 +1,16 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import tinymce from 'tinymce';
-import {Help} from "../../../utils/Help";
-import {environment} from "../../../environments/environment";
+import {Help} from '../../../utils/Help';
+import {environment} from '../../../environments/environment';
+
 @Component({
   selector: 'app-tiny-editor',
   templateUrl: './tiny-editor.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class TinyEditorComponent implements OnInit {
   @Input()
-  elementId: String;
+  elementId: string;
 
   @Output()
   public contentChange = new EventEmitter();
@@ -29,12 +29,12 @@ export class TinyEditorComponent implements OnInit {
     language: 'zh_CN',
     language_url: '/tinymce/lang/zh_CN.js',
     automatic_uploads: false,
-    images_upload_url: environment.SERVER_URL+'/bizfile/uploadSingleFile',
+    images_upload_url: environment.SERVER_URL + '/bizfile/uploadSingleFile',
     paste_data_images: true,
-    branding:false
+    branding: false
   };
 
-  constructor(private help:Help) {
+  constructor(private help: Help) {
 
   }
 
@@ -45,7 +45,7 @@ export class TinyEditorComponent implements OnInit {
     const editor = tinymce.get('editorID');
     console.log(editor);
     editor.uploadImages(success => {
-      const url = environment.SERVER_URL+'/bizfile/uploadSingleFile';
+      const url = environment.SERVER_URL + '/bizfile/uploadSingleFile';
       console.log('调用了此回调函数');
       this.help.post(url, this.content).subscribe(res => console.log(res));
     });
@@ -58,6 +58,7 @@ export class TinyEditorComponent implements OnInit {
   ngOnDestroy() {
     tinymce.remove(this.editor);        // 组件移除时销毁编辑器
   }
+
   /**
    * change
    */

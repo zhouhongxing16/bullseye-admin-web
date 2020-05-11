@@ -9,6 +9,7 @@ export class WxMenuService extends BaseService<WxMenu> {
 
   url = {
     listByPage: '/wxmenu/listByPage',
+    listByParams: '/wxmenu/getListByParams',
     create: '/wxmenu/create',
     deleteById: '/wxmenu/delete',
     getById: '/wxmenu/getById',

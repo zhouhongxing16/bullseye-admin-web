@@ -79,7 +79,7 @@ export class DefaultLayoutComponent implements OnInit {
         const that = this;
         this.help.post('/menu/getMenusByAccountId', null).subscribe(msg => {
             if (msg.success) {
-                that.menus = msg.data;
+                that.menus = msg.list;
             } else {
                 this.message.create('error', msg.message);
                 console.log(msg);

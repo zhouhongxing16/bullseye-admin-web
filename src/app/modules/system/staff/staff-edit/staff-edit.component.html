@@ -46,8 +46,8 @@
       <nz-form-item nzFlex>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="genderId">性别</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写性别">
-          <input nz-input placeholder="请填写性别" formControlName="genderId" [(ngModel)]="obj.genderId" name="genderId"
-                 id="genderId"/>
+          <app-dictionary typeCode="Gender" formControlName="genderId" [(ngModel)]="obj.genderId" name="genderId"
+                          id="genderId"></app-dictionary>
         </nz-form-control>
 
       </nz-form-item>

@@ -1,15 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../account.service';
 import {Help} from '../../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {Account} from '../Account';
-import {BehaviorSubject, of} from 'rxjs';
+import {of} from 'rxjs';
 import {StaffService} from '../../staff/staff.service';
 import {Staff} from '../../staff/staff';
 
@@ -93,29 +89,27 @@ export class AccountEditComponent implements OnInit {
       expiredDate: [null, null],
 
     });
-
+    this.getStaffListByParams();
 
   }
 
-  searchChange$ = new BehaviorSubject('');
+  /*// searchChange$ = new BehaviorSubject('');
 
   onSearch(value: string): void {
     this.staffParams.keyword = value;
     this.staffList = [];
     this.getStaffListByPage(true);
     this.searchChange$.next(value);
-  }
+  }*/
 
-  getStaffListByPage(reset: boolean = false) {
-    this.tempStaffList = [];
-    if (reset) {
-      this.staffPageIndex = 1;
-    }
+  getStaffListByParams(reset: boolean = false) {
     this.help.isLoading = true;
-    this.staffService.getListByPage(this.staffPageIndex, this.staffPageSize, this.staffParams).subscribe(data => {
+    this.staffService.getListByParams(this.staffParams).subscribe(data => {
       this.help.isLoading = false;
-      this.staffPageIndex = this.staffPageIndex + 1;
-      this.staffList = [...this.staffList, ...data.rows];
+      console.log(data);
+      if (data.success) {
+        this.staffList = data.list;
+      }
     }, err => {
       this.help.isLoading = false;
       this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);

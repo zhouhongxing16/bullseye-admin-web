@@ -9,6 +9,7 @@ export class LoginRecordService extends BaseService<LoginRecord> {
 
   url = {
     listByPage: '/loginrecord/listByPage',
+    listByParams: '/loginrecord/getListByParams',
     create: '/loginrecord/create',
     deleteById: '/loginrecord/delete',
     getById: '/loginrecord/getById',

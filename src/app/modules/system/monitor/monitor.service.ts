@@ -7,6 +7,7 @@ import {BaseService} from '../../../../utils/base.service';
 export class MonitorService extends BaseService<null> {
   url = {
     listByPage: '/',
+    listByParams: '/',
     create: '',
     deleteById: '',
     getById: '',

@@ -94,7 +94,7 @@ export class MenuListComponent implements OnInit {
   getAllMenus() {
     this.menuService.getAllMenus().subscribe(msg => {
       if (msg.success) {
-        this.nodes = msg.data;
+        this.nodes = msg.list;
       }
     });
   }
@@ -107,6 +107,22 @@ export class MenuListComponent implements OnInit {
       this.menuService.deleteById(this.rightNode.origin.id).subscribe(msg => {
         if (msg.success) {
           this.getAllMenus();
+          this.help.showMessage('success', msg.message);
+        } else {
+          this.help.showMessage('error', msg.message);
+        }
+      });
+    }
+
+  }
+
+  deleteMenuAuth(id: string) {
+    if (this.rightNode.children.length > 0) {
+      this.help.showMessage('warning', '请先删除子节点！');
+    } else {
+      this.menuService.deleteMenuAuthById(id).subscribe(msg => {
+        if (msg.success) {
+          this.getAuthListByPage(true);
           this.help.showMessage('success', msg.message);
         } else {
           this.help.showMessage('error', msg.message);

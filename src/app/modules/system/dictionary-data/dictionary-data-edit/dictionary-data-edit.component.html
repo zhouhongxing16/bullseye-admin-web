@@ -1,0 +1,64 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="typeId">类型</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择类型">
+      <nz-select
+        nzPlaceHolder="请选择类型"
+        nzAllowClear
+        nzShowSearch
+        nzServerSearch
+        formControlName="typeId"
+        [(ngModel)]="obj.typeId"
+        name="typeId"
+        id="typeId"
+      >
+        <ng-container *ngFor="let item of typeList">
+          <nz-option *ngIf="!help.isLoading" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        </ng-container>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+	<nz-form-item>
+		<nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="code">编码</nz-form-label>
+		<nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入code">
+			<input nz-input formControlName="code" [(ngModel)]="obj.code" name="code" id="code">
+		</nz-form-control>
+	</nz-form-item>
+
+	<nz-form-item>
+		<nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+		<nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入name">
+			<input nz-input formControlName="name" [(ngModel)]="obj.name" name="name" id="name">
+		</nz-form-control>
+	</nz-form-item>
+
+	<nz-form-item>
+		<nz-form-label [nzSm]="6" [nzXs]="24" nzFor="remark">备注</nz-form-label>
+		<nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入备注">
+			<input nz-input formControlName="remark" [(ngModel)]="obj.remark" name="remark" id="remark">
+
+    </nz-form-control>
+	</nz-form-item>
+
+	<nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择">
+      <nz-radio-group formControlName="status" [(ngModel)]="obj.status" name="status" id="status">
+        <label nz-radio [nzValue]="1">启用</label>
+        <label nz-radio [nzValue]="0">禁用</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+
+	<nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="help.isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" (click)="help.goToPage('/dictionarydata/list',this.pageParams)"
+              [nzLoading]="help.isLoading">取消
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

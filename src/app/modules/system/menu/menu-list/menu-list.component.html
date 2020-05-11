@@ -23,7 +23,7 @@
     <li nz-menu-item (click)="createMenu()">增加</li>
     <li nz-menu-item (click)="editMenu()">修改</li>
     <li nz-menu-item (click)="addAuth()">权限</li>
-    <li nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteObject()" nz-menu-item>删除</li>
+    <li nz-menu-item nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteObject()" >删除</li>
   </ul>
 </nz-dropdown-menu>
 
@@ -55,7 +55,7 @@
     </ul>
   </ng-template>
 </nz-tree>-->
-<nz-modal nzClosable="true" [(nzVisible)]="drawerMenuAuthVisible" nzTitle="菜单权限"
+<nz-modal nzClosable="true" nzMaskClosable="false" [(nzVisible)]="drawerMenuAuthVisible" nzTitle="菜单权限"
           nzWidth="40%" (nzOnCancel)="close()" [nzFooter]="modalFooter">
   <form nz-form  [formGroup]="validateAuthForm">
     <nz-form-item>
@@ -128,13 +128,13 @@
     [nzFrontPagination]="false"
     (nzPageIndexChange)="getAuthListByPage()"
     (nzPageSizeChange)="getAuthListByPage()">
-    <thead nzSingleSort>
+    <thead>
       <tr>
-        <th nzShowSort nzSortKey="name">名称</th>
-        <th nzShowSort nzSortKey="code">编码</th>
-        <th nzShowSort nzSortKey="describe">描述</th>
-        <th nzShowSort nzSortKey="status">状态</th>
-        <th nzShowSort nzSortKey="created">创建时间</th>
+        <th>名称</th>
+        <th>编码</th>
+        <th>描述</th>
+        <th>状态</th>
+        <th>创建时间</th>
         <th>
           <span>操作</span>
         </th>
@@ -152,7 +152,7 @@
             <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i>
           </button>
           <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" title="修改数据" nz-button nzType="primary"
-                  nzShape="circle">
+                  nzShape="circle" (nzOnConfirm)="deleteMenuAuth(data.id)">
             <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
           </button>
         </td>

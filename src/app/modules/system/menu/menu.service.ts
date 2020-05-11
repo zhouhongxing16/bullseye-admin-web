@@ -11,6 +11,7 @@ export class MenuService extends BaseService<Menu> {
 
   url = {
     listByPage: '/menu/listByPage',
+    listByParams: '/menu/getListByParams',
     getMenuAuthListByPage: '/menuauth/listByPage',
     create: '/menu/create',
     deleteById: '/menu/delete',
@@ -21,6 +22,7 @@ export class MenuService extends BaseService<Menu> {
     add: '',
     getAllMenus: '/menu/getAllMenus',
     getOrganizationMenus: '/menu/getOrganizationMenus',
+    deleteMenuAuthById: '/menuauth/delete',
   };
 
 
@@ -32,6 +34,9 @@ export class MenuService extends BaseService<Menu> {
     return this.help.post(this.url.getOrganizationMenus, params);
   }
 
+  deleteMenuAuthById(id: string) {
+    return this.help.get(this.url.deleteMenuAuthById + `/` + id);
+  }
 
 
   getMenuAuthListByPage(pageNum: number = 1, pageSize: number = 10, params: any): Observable<any> {

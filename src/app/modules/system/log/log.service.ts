@@ -9,6 +9,7 @@ export class LogService extends BaseService<Log> {
 
   url = {
     listByPage: '/log/listByPage',
+    listByParams: '/log/getListByParams',
     create: '/log/create',
     deleteById: '/log/delete',
     getById: '/log/getById',

@@ -8,6 +8,7 @@ export class AccountService extends BaseService<Account> {
 
   url = {
     listByPage: '/account/listByPage',
+    listByParams: '/account/getListByParams',
     create: '/account/create',
     deleteById: '/account/delete',
     getById: '/account/getById',

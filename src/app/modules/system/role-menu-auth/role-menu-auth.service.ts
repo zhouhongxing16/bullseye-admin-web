@@ -8,6 +8,7 @@ import {Role} from '../role/role';
 export class RoleMenuAuthService extends BaseService<Role> {
   url = {
     listByPage: '/role/listByPage',
+    listByParams: '/role/getListByParams',
     create: '/role/create',
     deleteById: '/role/delete',
     getById: '/role/getById',

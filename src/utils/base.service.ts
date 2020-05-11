@@ -18,6 +18,7 @@ export class BaseService<T> {
   private _id: string;
   public _url: {
     listByPage: string;
+    listByParams: string;
     create: string;
     update: string;
     deleteById: string;
@@ -63,6 +64,13 @@ export class BaseService<T> {
           return this.data;
         }));
     }
+  }
+
+  getListByParams(params: any): Observable<any> {
+    return this.help.post(`${this.url.listByParams}`, params).pipe(
+      map(res => {
+        return res;
+      }));
   }
 
   saveOrUpdateData(data: any) {

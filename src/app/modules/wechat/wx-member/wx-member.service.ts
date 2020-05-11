@@ -9,6 +9,7 @@ export class WxMemberService extends BaseService<WxMember> {
 
   url = {
     listByPage: '/wxmember/listByPage',
+    listByParams: '/wxmember/getListByParams',
     create: '/wxmember/create',
     deleteById: '/wxmember/delete',
     getById: '/wxmember/getById',

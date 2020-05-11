@@ -8,7 +8,7 @@
   </nz-form-item>
 
 
-  <nz-form-item>
+  <!--<nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">人员</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择人员">
       <nz-select
@@ -22,6 +22,28 @@
         name="staffId"
         id="staffId"
         (nzOnSearch)="onSearch($event)"
+      >
+        <ng-container *ngFor="let item of staffList">
+          <nz-option *ngIf="!help.isLoading" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+        </ng-container>
+        <nz-option *ngIf="help.isLoading" nzDisabled nzCustomContent>
+          <i nz-icon nzType="loading" class="loading-icon"></i> 查询中...
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>-->
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">人员</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择人员">
+      <nz-select
+        nzPlaceHolder="请选择员工"
+        nzAllowClear
+        nzShowSearch
+        formControlName="staffId"
+        [(ngModel)]="obj.staffId"
+        name="staffId"
+        id="staffId"
       >
         <ng-container *ngFor="let item of staffList">
           <nz-option *ngIf="!help.isLoading" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>

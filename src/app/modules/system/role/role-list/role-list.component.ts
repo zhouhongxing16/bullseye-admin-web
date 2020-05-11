@@ -54,7 +54,7 @@ export class RoleListComponent extends BaseListComponent<Role> {
       if (msg.success) {
         this.roleId = roleId;
         this.getCheckedLeafMenus(roleId);
-        this.menuNodes = msg.data;
+        this.menuNodes = msg.list;
       }
     });
   }
@@ -104,7 +104,7 @@ export class RoleListComponent extends BaseListComponent<Role> {
     this.roleService.getCheckedLeafMenus({roleId: roleId, isLeaf: true}).subscribe(res => {
       if (res.success) {
         that.roleMenuCheckedKeys = [];
-        res.data.forEach(item => {
+        res.list.forEach(item => {
           that.roleMenuCheckedKeys.push(item.menuId);
         });
       }
@@ -126,7 +126,7 @@ export class RoleListComponent extends BaseListComponent<Role> {
   getMenuAndAuthByRoleId(roleId: string) {
     this.roleMenuAuthService.getMenuAndAuthByRoleId(roleId).subscribe(msg => {
       if (msg.success) {
-        this.menuAuthNodes = msg.data;
+        this.menuAuthNodes = msg.list;
         this.getRoleMenuAuthCheckedKeys(roleId);
       }
     });
@@ -137,7 +137,7 @@ export class RoleListComponent extends BaseListComponent<Role> {
     this.roleMenuAuthService.getRoleMenuAuthCheckedData({roleId: roleId}).subscribe(res => {
       if (res.success) {
         that.roleMenuAuthCheckedKeys = [];
-        res.data.forEach(item => {
+        res.list.forEach(item => {
           that.roleMenuAuthCheckedKeys.push(item.menuAuthId);
         });
       }
@@ -154,7 +154,7 @@ export class RoleListComponent extends BaseListComponent<Role> {
   // 递归获取菜单功能授权叶子节点
   getChildMenuAuthLeafNode(nodes: any) {
     this.selectMenuAuthMenus = [];
-    nodes.forEach((node,index) => {
+    nodes.forEach((node) => {
       if (node.isLeaf && node.origin.type === 'menuAuth') {
         this.selectMenuAuthMenus.push({
           roleId: this.roleId,
@@ -162,7 +162,6 @@ export class RoleListComponent extends BaseListComponent<Role> {
           status: 1,
           isLeaf: node.isLeaf
         });
-        console.log(index)
       }
       /*if (!node.isLeaf && node.children.length > 0) {
         this.getChildMenuAuthLeafNode(node.children);

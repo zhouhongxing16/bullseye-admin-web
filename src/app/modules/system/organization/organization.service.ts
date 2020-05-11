@@ -8,6 +8,7 @@ import {Organization} from './organization';
 export class OrganizationService extends BaseService<Organization> {
   url = {
     listByPage: '/organization/listByPage',
+    listByParams: '/organization/getListByParams',
     create: '/organization/create',
     deleteById: '/organization/delete',
     getById: '/organization/getById',

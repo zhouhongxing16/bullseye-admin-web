@@ -1,0 +1,90 @@
+<div class="table-operations" nz-row="24">
+  <div nz-col nzSpan="8">
+    <button nz-button nzType="primary" (click)="goToPage('/dictionarytype/edit',{code:authData.authCode})"
+            *ngIf="auth.create"><i class="anticon anticon-plus"></i>添加
+    </button>&nbsp;&nbsp;
+    <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
+  </div>
+  <div nz-col nzSpan="16">
+    <div class="searchWidth">
+      <nz-input-group nzSearch nzSize="default" [nzAddOnAfter]="suffixButton">
+        <input type="text" [(ngModel)]="params.keyword" (keyup.enter)="search($event,true)"
+               (ngModelChange)="search($event,false)" nz-input placeholder="名称"/>
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button (click)="search($event,true)" nz-button nzType="primary" nzSize="default" nzSearch>搜索</button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<nz-divider nzText="字典类型"></nz-divider>
+
+<nz-table
+  #dictionaryTypeTable
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzScroll]="{x:'100%'}"
+  [nzLoading]="help.isLoading"
+  [nzTotal]="total"
+  [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageSize"
+  [nzFrontPagination]="false"
+  (nzPageIndexChange)="getListByPage()"
+  (nzPageSizeChange)="getListByPage(true)">
+  <thead nzSingleSort>
+  <tr>
+
+
+    <th>类型代码</th>
+
+
+    <th>类型名称</th>
+
+
+    <th>状态</th>
+
+
+    <th>创建时间</th>
+
+
+    <th>备注</th>
+
+
+    <th>创建人</th>
+
+
+    <th><span>操作</span></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of  dictionaryTypeTable.data">
+
+
+    <td>{{data.code}}</td>
+
+
+    <td>{{data.name}}</td>
+
+    <td>{{data.status|status}}</td>
+
+    <td>{{data.created}}</td>
+
+    <td>{{data.remark}}</td>
+
+    <td>{{data.userName}}</td>
+
+
+    <td>
+
+      <button title="修改数据" (click)="goToPage('/dictionarytype/edit',{id:data.id,code:authData.authCode})" nz-button
+              nzType="primary" nzShape="circle" *ngIf="auth.update">
+        <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i></button>
+      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete"
+              title="删除数据" nz-button nzType="primary" nzShape="circle">
+        <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

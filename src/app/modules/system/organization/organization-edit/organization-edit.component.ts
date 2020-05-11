@@ -9,7 +9,7 @@ import {Help} from '../../../../../utils/Help';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {Organization} from "../organization";
+import {Organization} from '../organization';
 
 @Component({
   selector: 'app-organization-edit',
@@ -18,19 +18,21 @@ import {Organization} from "../organization";
 })
 export class OrganizationEditComponent implements OnInit {
 
-
+  pageParams: any;
   validateForm: FormGroup;
-  isLoading = false;
   obj: Organization = new Organization();
 
   constructor(
     private formBuilder: FormBuilder,
     private organizationService: OrganizationService,
     private route: ActivatedRoute,
-    private help: Help) {
+    public help: Help) {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.pageParams = params;
+    });
     this.route.queryParamMap.pipe(
       switchMap((params: ParamMap) => {
         if (params.get('id')) {
@@ -75,9 +77,9 @@ export class OrganizationEditComponent implements OnInit {
   }
 
   submitForm() {
-    this.isLoading = true;
+    this.help.isLoading = true;
     this.organizationService.saveOrUpdateData(this.obj).subscribe(res => {
-      this.isLoading = false;
+      this.help.isLoading = false;
       if (res.success) {
         this.help.showMessage('success', res.message);
         this.help.back();

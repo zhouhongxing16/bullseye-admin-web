@@ -10,6 +10,7 @@ export class WxReplyService extends BaseService<WxReply> {
 
   url = {
     listByPage: '/wxreply/listByPage',
+    listByParams: '/wxreply/getListByParams',
     create: '/wxreply/create',
     deleteById: '/wxreply/delete',
     getById: '/wxreply/getById',

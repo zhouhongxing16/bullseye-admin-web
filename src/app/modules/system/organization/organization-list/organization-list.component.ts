@@ -34,7 +34,7 @@ export class OrganizationListComponent extends BaseListComponent<Department> {
       if (msg.success) {
         this.organizationId = organizationId;
         this.getCheckedLeafMenus(organizationId);
-        this.nodes = msg.data;
+        this.nodes = msg.list;
       }
     });
   }
@@ -98,7 +98,7 @@ export class OrganizationListComponent extends BaseListComponent<Department> {
     this.organizationService.getCheckedLeafMenus({organizationId: organizationId, isLeaf: true}).subscribe(res => {
       if (res.success) {
         that.defaultCheckedKeys = [];
-        res.data.forEach(item => {
+        res.list.forEach(item => {
           that.defaultCheckedKeys.push(item.menuId);
         });
         console.log(this.defaultCheckedKeys);

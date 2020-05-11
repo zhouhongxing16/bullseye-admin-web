@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {WxMaterial} from "./wx-material";
 import {BaseService} from '../../../../utils/base.service';
+import {WxMaterial} from './wx-material';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import {BaseService} from '../../../../utils/base.service';
 export class WxMaterialService extends BaseService<WxMaterial>{
   url = {
     listByPage: '/wxmaterial/listByPage',
+    listByParams: '/wxmaterial/getListByParams',
     create: '/wxmaterial/create',
     deleteById: '/wxmaterial/delete',
     getById: '/wxmaterial/getById',

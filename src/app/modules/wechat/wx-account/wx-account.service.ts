@@ -8,6 +8,7 @@ import {BaseService} from '../../../../utils/base.service';
 export class WxAccountService extends BaseService<WxAccount> {
   url = {
     listByPage: '/wxaccount/listByPage',
+    listByParams: '/wxaccount/getListByParams',
     create: '/wxaccount/create',
     deleteById: '/wxaccount/delete',
     getById: '/wxaccount/getById',

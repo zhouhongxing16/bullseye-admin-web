@@ -1,0 +1,14 @@
+<nz-select
+  nzPlaceHolder="请选择类型"
+  nzAllowClear
+  nzShowSearch
+  nzServerSearch
+  [(ngModel)]="value"
+  name="typeId"
+  id="typeId"
+  (ngModelChange)="change()"
+>
+  <ng-container *ngFor="let item of dataList">
+    <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+  </ng-container>
+</nz-select>

@@ -9,6 +9,7 @@ export class DepartmentService extends BaseService<Department> {
 
    url = {
     listByPage: '/department/listByPage',
+    listByParams: '/department/getListByParams',
     create: '/department/create',
     deleteById: '/department/delete',
     getById: '/department/getById',

@@ -8,6 +8,7 @@ import {Role} from './role';
 export class RoleService extends BaseService<Role> {
   url = {
     listByPage: '/role/listByPage',
+    listByParams: '/role/getListByParams',
     create: '/role/create',
     deleteById: '/role/delete',
     getById: '/role/getById',
