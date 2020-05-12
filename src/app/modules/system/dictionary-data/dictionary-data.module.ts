@@ -6,15 +6,17 @@ import { DictionaryDataListComponent } from './dictionary-data-list/dictionary-d
 import { DictionaryDataEditComponent } from './dictionary-data-edit/dictionary-data-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {StaffModule} from '../staff/staff.module';
 
 @NgModule({
   declarations: [DictionaryDataListComponent, DictionaryDataEditComponent],
-  imports: [
-    CommonModule,
-    DictionaryDataRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgZorroAntdModule
-  ]
+    imports: [
+        CommonModule,
+        DictionaryDataRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgZorroAntdModule,
+        StaffModule
+    ]
 })
 export class DictionaryDataModule { }

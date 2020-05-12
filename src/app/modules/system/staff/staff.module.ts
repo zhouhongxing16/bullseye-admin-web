@@ -6,16 +6,20 @@ import { StaffListComponent } from './staff-list/staff-list.component';
 import { StaffEditComponent } from './staff-edit/staff-edit.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DictionaryComponent} from '../../../components/dictionary/dictionary.component';
+import {CommonSelectComponent} from '../../../components/common-select/common-select.component';
 
 @NgModule({
-  declarations: [StaffListComponent, StaffEditComponent, DictionaryComponent],
-    imports: [
-        CommonModule,
-        StaffRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        NgZorroAntdModule,
-    ]
+  declarations: [StaffListComponent, StaffEditComponent, CommonSelectComponent],
+  exports: [
+    CommonSelectComponent,
+    CommonSelectComponent
+  ],
+  imports: [
+    CommonModule,
+    StaffRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgZorroAntdModule,
+  ]
 })
 export class StaffModule { }

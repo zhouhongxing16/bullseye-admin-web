@@ -18,7 +18,6 @@ export class StaffEditComponent implements OnInit {
 
   validateForm: FormGroup;
   obj: Staff = new Staff();
-
   constructor(
     private formBuilder: FormBuilder,
     private staffService: StaffService,

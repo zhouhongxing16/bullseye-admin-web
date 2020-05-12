@@ -7,6 +7,7 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {CommonPipeModule} from '../../common/common-pipe.module';
+import {StaffModule} from '../staff/staff.module';
 
 @NgModule({
   declarations: [AccountListComponent, AccountEditComponent],
@@ -16,7 +17,8 @@ import {CommonPipeModule} from '../../common/common-pipe.module';
         ReactiveFormsModule,
         FormsModule,
         NgZorroAntdModule,
-        CommonPipeModule
+        CommonPipeModule,
+        StaffModule
     ]
 })
 export class AccountModule { }

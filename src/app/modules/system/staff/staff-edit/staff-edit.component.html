@@ -12,10 +12,11 @@
         (nzChange)="handleChange($event)"
       >
         <ng-container *ngIf="!obj.avatar">
-          <i class="upload-icon" nz-icon [type]="help.isLoading ? 'loading' : 'plus'"></i>
+          <i class="upload-icon" nz-icon [nzType]="help.isLoading ? 'loading' : 'plus'"></i>
           <div class="ant-upload-text">头像</div>
         </ng-container>
-        <img *ngIf="obj.avatar" width="150px" height="150px" [src]="help.environment.SERVER_URL+obj.avatar" class="avatar"/>
+        <img *ngIf="obj.avatar" width="100px" height="100px" [src]="help.environment.SERVER_URL+obj.avatar"
+             class="avatar"/>
       </nz-upload>
     </div>
 
@@ -45,9 +46,11 @@
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="genderId">性别</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请填写性别">
-          <app-dictionary typeCode="Gender" formControlName="genderId" [(ngModel)]="obj.genderId" name="genderId"
-                          id="genderId"></app-dictionary>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择性别">
+          <app-common-select url="/dictionarydata/getListByParams" [params]="{typeCode:'Gender'}" ngDefaultControl
+                             formControlName="genderId"
+                             [(ngModel)]="obj.genderId" name="genderId"
+                             id="genderId"></app-common-select>
         </nz-form-control>
 
       </nz-form-item>
@@ -68,7 +71,7 @@
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">邮箱</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写邮箱" formControlName="email" [(ngModel)]="obj.email" name="email" id="email"/>
         </nz-form-control>
 
@@ -100,9 +103,11 @@
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="departmentId">所属部门</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入新密码">
-          <input nz-input placeholder="请填写所属部门" formControlName="departmentId" [(ngModel)]="obj.departmentId"
-                 name="departmentId" id="departmentId"/>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择部门">
+          <app-common-select url="/department/getAuthListByParams" [params]="{typeCode:'Gender'}" ngDefaultControl
+                          formControlName="departmentId"
+                          [(ngModel)]="obj.departmentId" name="departmentId"
+                          id="departmentId"></app-common-select>
         </nz-form-control>
 
       </nz-form-item>
@@ -122,10 +127,12 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="positionId">职位</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="positionId">职位</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-          <input nz-input placeholder="请填写职位" formControlName="positionId" [(ngModel)]="obj.positionId"
-                 name="positionId" id="positionId"/>
+          <app-common-select url="/dictionarydata/getListByParams" [params]="{typeCode:'Position'}" ngDefaultControl
+                             formControlName="positionId"
+                             [(ngModel)]="obj.positionId" name="positionId"
+                             id="positionId"></app-common-select>
         </nz-form-control>
 
       </nz-form-item>
@@ -134,7 +141,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="titleId">职称</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="titleId">职称</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写职称" formControlName="titleId" [(ngModel)]="obj.titleId" name="titleId"
                  id="titleId"/>
@@ -146,7 +153,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="typeId">人员类型</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="typeId">人员类型</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写人员类型" formControlName="typeId" [(ngModel)]="obj.typeId" name="typeId"
                  id="typeId"/>
@@ -157,7 +164,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="typeId">入职日期</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="typeId">入职日期</nz-form-label>
 
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <nz-date-picker placeholder="请填入职日期" formControlName="joinDate" [(ngModel)]="obj.joinDate" ame="joinDate"
@@ -168,7 +175,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="birthProvinceId">所属省份</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="birthProvinceId">所属省份</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写所属省份" formControlName="birthProvinceId" [(ngModel)]="obj.birthProvinceId"
                  name="birthProvinceId" id="birthProvinceId"/>
@@ -179,7 +186,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="birthCityId">所属城市</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="birthCityId">所属城市</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写所属城市" formControlName="birthCityId" [(ngModel)]="obj.birthCityId"
                  name="birthCityId" id="birthCityId"/>
@@ -191,7 +198,7 @@
 
     <div nz-col [nzSpan]="8">
       <nz-form-item nzFlex>
-        <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="policy">政治面貌</nz-form-label>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="policy">政治面貌</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
           <input nz-input placeholder="请填写政治面貌" formControlName="policy" [(ngModel)]="obj.policy" name="policy"
                  id="policy"/>
@@ -216,8 +223,10 @@
 
 
   <nz-form-item nz-row style="margin-bottom:8px;">
-    <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="help.isLoading" (click)="submitForm()">保存</button>&nbsp;&nbsp;
+    <nz-form-control [nzSpan]="14" [nzOffset]="10">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="help.isLoading"
+              (click)="submitForm()">保存
+      </button>&nbsp;&nbsp;
       <button nz-button nzType="dashed" (click)="help.back()" [nzLoading]="help.isLoading">取消</button>
     </nz-form-control>
   </nz-form-item>

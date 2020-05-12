@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DictionaryComponent } from './dictionary.component';
+import { CommonSelectComponent } from './common-select.component';
 
-describe('DictionaryComponent', () => {
-  let component: DictionaryComponent;
-  let fixture: ComponentFixture<DictionaryComponent>;
+describe('CommonSelectComponent', () => {
+  let component: CommonSelectComponent;
+  let fixture: ComponentFixture<CommonSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DictionaryComponent ]
+      declarations: [ CommonSelectComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DictionaryComponent);
+    fixture = TestBed.createComponent(CommonSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -23,12 +23,10 @@ export class DictionaryDataEditComponent implements OnInit {
 
 
   pageParams: any;
-  typeParams: any = {};
   validateForm: FormGroup;
   isLoading = false;
   obj: DictionaryData = new DictionaryData();
 
-  typeList: DictionaryType[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -77,19 +75,6 @@ export class DictionaryDataEditComponent implements OnInit {
       userId: [null, null],
 
 
-    });
-    this.getTypeListByParams();
-  }
-
-  getTypeListByParams(reset: boolean = false) {
-
-    this.help.isLoading = true;
-    this.dictionaryTypeService.getListByParams(this.typeParams).subscribe(data => {
-      this.help.isLoading = false;
-      this.typeList = data.list;
-    }, err => {
-      this.help.isLoading = false;
-      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
     });
   }
 

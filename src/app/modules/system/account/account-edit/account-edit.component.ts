@@ -19,11 +19,6 @@ export class AccountEditComponent implements OnInit {
   pageParams: any;
   validateForm: FormGroup;
   obj: Account = new Account();
-  staffList: Staff[] = [];
-  tempStaffList: Staff[];
-
-  staffPageIndex = 1;
-  staffPageSize = 10;
   staffParams: any = {};
 
   constructor(
@@ -89,32 +84,8 @@ export class AccountEditComponent implements OnInit {
       expiredDate: [null, null],
 
     });
-    this.getStaffListByParams();
-
   }
 
-  /*// searchChange$ = new BehaviorSubject('');
-
-  onSearch(value: string): void {
-    this.staffParams.keyword = value;
-    this.staffList = [];
-    this.getStaffListByPage(true);
-    this.searchChange$.next(value);
-  }*/
-
-  getStaffListByParams(reset: boolean = false) {
-    this.help.isLoading = true;
-    this.staffService.getListByParams(this.staffParams).subscribe(data => {
-      this.help.isLoading = false;
-      console.log(data);
-      if (data.success) {
-        this.staffList = data.list;
-      }
-    }, err => {
-      this.help.isLoading = false;
-      this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);
-    });
-  }
 
   submitForm() {
     this.help.isLoading = true;

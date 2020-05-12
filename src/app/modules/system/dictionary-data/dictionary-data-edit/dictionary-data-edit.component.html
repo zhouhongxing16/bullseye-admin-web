@@ -3,20 +3,10 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="typeId">类型</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请选择类型">
-      <nz-select
-        nzPlaceHolder="请选择类型"
-        nzAllowClear
-        nzShowSearch
-        nzServerSearch
-        formControlName="typeId"
-        [(ngModel)]="obj.typeId"
-        name="typeId"
-        id="typeId"
-      >
-        <ng-container *ngFor="let item of typeList">
-          <nz-option *ngIf="!help.isLoading" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
-        </ng-container>
-      </nz-select>
+      <app-common-select url="/dictionarytype/getListByParams" [params]="{}" ngDefaultControl
+                      formControlName="typeId"
+                      [(ngModel)]="obj.typeId" name="typeId"
+                      id="typeId"></app-common-select>
     </nz-form-control>
   </nz-form-item>
 
