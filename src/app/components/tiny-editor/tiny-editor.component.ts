@@ -18,27 +18,39 @@ export class TinyEditorComponent implements OnInit {
   @Input()
   content;
 
-  editor;
-  // 编辑器配置
-  editorConfig = {
-    base_url: '/tinymce',
-    height: 500,
-    menubar: false,
-    plugins: ['image paste media'],
-    toolbar: 'image paste media',
-    language: 'zh_CN',
-    language_url: '/tinymce/lang/zh_CN.js',
-    automatic_uploads: false,
-    images_upload_url: environment.SERVER_URL + '/bizfile/uploadSingleFile',
-    paste_data_images: true,
-    branding: false
-  };
+  editorConfig: any = {};
 
-  constructor(private help: Help) {
-
+  constructor(public help: Help) {
+    const editor = tinymce.get('editorID');
+    // 编辑器配置
+    this.editorConfig = {
+      base_url: '/tinymce',
+      height: 500,
+      menubar: false,
+      plugins: ['image paste media'],
+      toolbar: 'image paste media',
+      language: 'zh_CN',
+      language_url: '/tinymce/lang/zh_CN.js',
+      automatic_uploads: true,
+      images_upload_url: environment.SERVER_URL + '/bizfile/uploadSingleFile',
+      paste_data_images: true,
+      branding: false,
+      images_upload_handler(blobInfo, succFun, failFun) {
+        // 转化为易于理解的file对象
+        const formData = new FormData();
+        formData.append('file', blobInfo.blob());
+        help.post(environment.SERVER_URL + '/bizfile/uploadSingleFile', formData).subscribe((res) => {
+          console.log(res);
+          succFun(res.fullFilePath);
+          // http://tinymce.ax-z.cn/general/upload-images.php
+        });
+      }
+    };
   }
 
+
   ngOnInit(): void {
+
   }
 
   postContent(): void {
@@ -55,9 +67,9 @@ export class TinyEditorComponent implements OnInit {
     console.log('编辑器的内容：', this.content);
   }
 
-  ngOnDestroy() {
+  /*ngOnDestroy() {
     tinymce.remove(this.editor);        // 组件移除时销毁编辑器
-  }
+  }*/
 
   /**
    * change
