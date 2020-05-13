@@ -40,7 +40,7 @@
         (nzChange)="handleChange($event)"
       >
         <ng-container *ngIf="!obj.thumbMediaId">
-          <i class="upload-icon" nz-icon [type]="isLoading ? 'loading' : 'plus'"></i>
+          <i class="upload-icon" nz-icon [nzType]="help.isLoading ? 'loading' : 'plus'"></i>
           <!--<div class="ant-upload-text">封面图</div>-->
         </ng-container>
         <img *ngIf="this.thumbUrl" width="150px" height="150px" [src]="this.thumbUrl" class="avatar"/>
