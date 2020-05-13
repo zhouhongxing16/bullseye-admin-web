@@ -76,11 +76,8 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24"  nzFor="content">详细内容</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24">
-      <!--<app-tiny-editor formControlName="content" name="content" id="content" [editor]="Editor" [config]="config"  [(ngModel)]="obj.content">
+      <app-tiny-editor ngDefaultControl formControlName="content" name="content" id="content"></app-tiny-editor>
 
-      </app-tiny-editor>-->
-     <!-- <ckeditor formControlName="content" name="content" id="content" [editor]="Editor" [config]="config"  [(ngModel)]="obj.content">
-      </ckeditor>-->
     </nz-form-control>
   </nz-form-item>
 

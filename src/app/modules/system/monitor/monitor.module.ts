@@ -9,14 +9,17 @@ import {TinyEditorComponent} from "../../../components/tiny-editor/tiny-editor.c
 import {EditorModule} from "@tinymce/tinymce-angular";
 
 @NgModule({
-    declarations: [MonitorListComponent,TinyEditorComponent],
-  imports: [
-    CommonModule,
-    MonitorRoutingModule,
-    NgZorroAntdModule,
-    FormsModule,
-    ReactiveFormsModule,
-    EditorModule,
-  ]
+    declarations: [MonitorListComponent, TinyEditorComponent],
+    exports: [
+        TinyEditorComponent
+    ],
+    imports: [
+        CommonModule,
+        MonitorRoutingModule,
+        NgZorroAntdModule,
+        FormsModule,
+        ReactiveFormsModule,
+        EditorModule,
+    ]
 })
 export class MonitorModule { }

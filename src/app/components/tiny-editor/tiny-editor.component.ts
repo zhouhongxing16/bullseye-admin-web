@@ -1,9 +1,9 @@
-import {Component, EventEmitter, forwardRef, OnInit, Output} from '@angular/core';
+import {Component, forwardRef, OnInit} from '@angular/core';
 import tinymce from 'tinymce';
 import {Help} from '../../../utils/Help';
 import {environment} from '../../../environments/environment';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {noop} from "rxjs";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {noop} from 'rxjs';
 
 @Component({
   selector: 'app-tiny-editor',
@@ -25,13 +25,18 @@ export class TinyEditorComponent implements OnInit, ControlValueAccessor {
   private onTouched: () => void = noop;
   private onChange: (_: any) => void = noop;
 
-
   constructor(public help: Help) {
     const editor = tinymce.get('editorID');
+
     // 编辑器配置
     this.editorConfig = {
       base_url: '/tinymce',
-      height: 500,
+      height: 1000,
+      plugins: `print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave bdmap indent2em autoresize lineheight formatpainter axupimgs`,
+      toolbar: `code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent |
+                     styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat |
+                     table image media charmap emoticons hr pagebreak insertdatetime print preview | fullscreen | bdmap indent2em lineheight`,
+
       menubar: false,
       language: 'zh_CN',
       language_url: '/tinymce/lang/zh_CN.js',

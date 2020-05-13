@@ -6,15 +6,17 @@ import { WxMaterialListComponent } from './wx-material-list/wx-material-list.com
 import { WxMaterialEditComponent } from './wx-material-edit/wx-material-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
+import {MonitorModule} from '../../system/monitor/monitor.module';
 
 @NgModule({
   declarations: [WxMaterialListComponent, WxMaterialEditComponent],
-  imports: [
-    CommonModule,
-    WxMaterialRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgZorroAntdModule,
-  ]
+    imports: [
+        CommonModule,
+        WxMaterialRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NgZorroAntdModule,
+        MonitorModule,
+    ]
 })
 export class WxMaterialModule { }
