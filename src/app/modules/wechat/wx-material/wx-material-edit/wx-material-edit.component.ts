@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {WxMaterialService} from "../wx-material.service";
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Help} from '../../../../../utils/Help';
-import {WxMaterial} from "../wx-material";
 import {switchMap} from 'rxjs/operators';
 import {Observable, Observer, of} from 'rxjs';
 import {UploadFile} from 'ng-zorro-antd';
 import {environment} from '../../../../../environments/environment';
+import {WxMaterialService} from '../wx-material.service';
+import {WxMaterial} from '../wx-material';
 
 @Component({
   selector: 'app-wx-material-edit',
@@ -16,7 +16,7 @@ import {environment} from '../../../../../environments/environment';
 })
 export class WxMaterialEditComponent implements OnInit {
 
-  //富文本相关---
+  // 富文本相关---
   @Input() content;
   public Editor = '';
 
@@ -31,12 +31,13 @@ export class WxMaterialEditComponent implements OnInit {
   obj: WxMaterial = new WxMaterial();
   chooseWxSourceId;
 
-  thumbUrl: String;
+  thumbUrl: string;
 
   constructor(private formBuilder: FormBuilder,
               private wxMaterialService: WxMaterialService,
               private route: ActivatedRoute,
-              private help: Help) { }
+              public help: Help) {
+  }
 
   ngOnInit() {
     this.route.paramMap.pipe(
@@ -52,13 +53,13 @@ export class WxMaterialEditComponent implements OnInit {
       if (d.success) {
         this.obj = d.data;
         this.wxMaterialService.getAttachFileById(this.obj.thumbFileId).subscribe(data => {
-          this.thumbUrl = environment.SERVER_URL+'/api/file'+data.data.path
-        })
+          this.thumbUrl = environment.SERVER_URL + '/api/file' + data.data.path;
+        });
       } else {
         this.obj = new WxMaterial();
       }
     });
-    if(this.chooseWxSourceId){
+    if (this.chooseWxSourceId) {
       this.obj.sourceId = this.chooseWxSourceId;
     }
     this.validateForm = this.formBuilder.group({
@@ -103,7 +104,7 @@ export class WxMaterialEditComponent implements OnInit {
         observer.complete();
       });
     });
-  }
+  };
 
   handleChange(info: { file: UploadFile }): void {
     switch (info.file.status) {
@@ -113,8 +114,8 @@ export class WxMaterialEditComponent implements OnInit {
       case 'done':
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           this.isLoading = false;
-          console.log(info)
-          this.thumbUrl = info.file.thumbUrl
+          console.log(info);
+          this.thumbUrl = info.file.thumbUrl;
           this.obj.thumbFileId = info.file.response.id;
         });
         break;
@@ -146,7 +147,7 @@ export class WxMaterialEditComponent implements OnInit {
 
   submitForm() {
     this.isLoading = true;
-    console.log(this.obj)
+    console.log(this.obj);
     this.wxMaterialService.updateMaterial(this.obj).subscribe(res => {
       this.isLoading = false;
       if (res.success) {
