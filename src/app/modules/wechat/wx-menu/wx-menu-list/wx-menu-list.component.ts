@@ -104,7 +104,7 @@ export class WxMenuListComponent extends BaseListComponent<WxMenu> {
     this.help.loading('删除中...');
     this.wxMenuService.deleteById(id).subscribe(res => {
       if (res.success) {
-        this.help.isLoading = false;
+        this.help.stopLoad();
         this.help.showMessage('success', res.message);
         this.getWxMenu(this.chooseWxSourceId);
       } else {

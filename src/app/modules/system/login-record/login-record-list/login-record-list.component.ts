@@ -43,7 +43,7 @@ export class LoginRecordListComponent implements OnInit {
     this.help.loading('删除中...');
     this.loginRecordService.deleteById(id).subscribe(res => {
       if (res.success) {
-        this.help.isLoading = false;
+        this.help.stopLoad();
         this.help.showMessage('success', res.message);
         this.getListByPage(true);
       } else {

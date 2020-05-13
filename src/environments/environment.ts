@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  SERVER_URL: 'https://bulleye.zhouhongxing.cn',
+  // SERVER_URL: 'https://bulleye.zhouhongxing.cn',
+  SERVER_URL: '',
 };
 
 /*
