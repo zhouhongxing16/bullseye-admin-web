@@ -68,8 +68,8 @@ export class BaseListComponent<T> implements OnInit {
     this.help.isLoading = true;
     this.service.getListByPage(this.pageIndex, this.pageSize, this.params).subscribe(data => {
       this.help.isLoading = false;
-      this.rows = data.rows;
-      this.total = data.total;
+      this.rows = data.page.list;
+      this.total = data.page.total;
     }, err => {
       this.help.isLoading = false;
       this.help.showMessage('error', `请求出现错误: ${JSON.stringify(err)}`);

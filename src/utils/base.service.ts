@@ -57,10 +57,6 @@ export class BaseService<T> {
       return this.help.post(`${this.url.listByPage}`, params).pipe(
         map(res => {
           this.flag = true;
-          this.data = {
-            rows: res.rows,
-            total: res.total
-          };
           return this.data;
         }));
     }
