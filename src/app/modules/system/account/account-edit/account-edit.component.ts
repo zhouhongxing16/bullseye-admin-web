@@ -7,7 +7,6 @@ import {switchMap} from 'rxjs/operators';
 import {Account} from '../Account';
 import {of} from 'rxjs';
 import {StaffService} from '../../staff/staff.service';
-import {Staff} from '../../staff/staff';
 
 @Component({
   selector: 'app-account-edit',

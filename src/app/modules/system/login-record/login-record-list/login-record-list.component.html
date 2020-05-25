@@ -8,7 +8,7 @@
   nzShowSizeChanger
   [nzData]="rows"
   [nzScroll]="{x:'100%'}"
-  [nzLoading]="loading"
+  [nzLoading]="help.isLoading"
   [nzTotal]="total"
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
@@ -57,11 +57,10 @@
     <td>{{data.created}}</td>
 
     <td>
-      <!--<button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
-        class="anticon anticon-edit"></i></button>-->
       <nz-popconfirm [nzTitle]="'确定删除吗?'">
         <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle">
-          <i nz-icon type="delete" theme="outline" twoToneColor="red" title="删除"></i></button>
+          <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
+        </button>
       </nz-popconfirm>
     </td>
   </tr>

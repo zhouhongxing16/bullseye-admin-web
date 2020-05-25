@@ -57,7 +57,7 @@ export class BaseService<T> {
       return this.help.post(`${this.url.listByPage}`, params).pipe(
         map(res => {
           this.flag = true;
-          return this.data;
+          return res;
         }));
     }
   }
