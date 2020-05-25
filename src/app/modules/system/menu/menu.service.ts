@@ -27,7 +27,7 @@ export class MenuService extends BaseService<Menu> {
 
 
   getAllMenus() {
-    return this.help.post(this.url.getAllMenus, null);
+    return this.help.get(this.url.getAllMenus);
   }
 
   getOrganizationMenus(params) {
