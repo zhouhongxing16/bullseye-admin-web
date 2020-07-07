@@ -27,13 +27,13 @@ export class SubmenuComponent implements OnInit {
     this.help.get(`/rolemenuauth/getAuthByMenuId/` + obj.id).subscribe(msg => {
       let enc = '';
       this.help.isLoading = false;
-      if (msg.success && !this.help.isEmpty(msg.data)) {
-        const data = JSON.stringify(msg.data);
+      if (msg.success && !this.help.isEmpty(msg.list)) {
+        const data = JSON.stringify(msg.list);
         enc = window.btoa(data);
         let authFlag = false;
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < msg.data.length; i++) {
-          if (msg.data[i].code === 'list') {
+          if (msg.list[i].code === 'list') {
             authFlag = true;
           }
         }
