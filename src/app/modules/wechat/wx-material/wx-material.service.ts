@@ -24,7 +24,7 @@ export class WxMaterialService extends BaseService<WxMaterial>{
     pubMaterialToUser: '/wxmaterial/pubMaterialToUser',
     addMaterial: '/wxmaterial/addMaterial',
     updateMaterial: '/wxmaterial/updateMaterial',
-    getAttachFileById: '/file/getById',
+    getAttachFileById: '/bizfile/getById',
     getEverMaterialBySourceId: '/wxmaterial/getEverMaterialBySourceId',
   };
 

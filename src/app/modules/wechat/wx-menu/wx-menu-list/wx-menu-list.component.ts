@@ -29,13 +29,12 @@ export class WxMenuListComponent extends BaseListComponent<WxMenu> {
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnInit() {
     this.initAuthData();
-    this.getListByPage();
     this.getWxAccount();
   }
 
   getWxAccount() {
     this.wxAccountService.getListByParams({}).subscribe(res => {
-      this.wxAccounts = res.data;
+      this.wxAccounts = res.list;
       this.getWxMenu(this.wxAccounts[0].sourceId);
     }, err => {
 

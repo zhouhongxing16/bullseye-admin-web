@@ -32,7 +32,7 @@ export class SubmenuComponent implements OnInit {
         enc = window.btoa(data);
         let authFlag = false;
         // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < msg.data.length; i++) {
+        for (let i = 0; i < msg.list.length; i++) {
           if (msg.list[i].code === 'list') {
             authFlag = true;
           }

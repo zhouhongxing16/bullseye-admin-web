@@ -1,0 +1,15 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="keyWord">名称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24"  nzErrorTip="请输入关键字">
+      <input nz-input formControlName="keyWord" [(ngModel)]="obj.name" name="name" id="name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item nz-row style="margin-bottom:8px;">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isLoading">保存</button>&nbsp;&nbsp;
+      <button nz-button nzType="dashed" routerLink="/wxtag/list" [nzLoading]="isLoading">取消</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

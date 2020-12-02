@@ -1,11 +1,11 @@
 <div class="table-operations">
-  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseWxSourceId" nzAllowClear nzPlaceHolder="Choose"
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="params.sourceId" nzAllowClear nzPlaceHolder="Choose"
              (ngModelChange)="getListByPage(true)">
     <ng-container *ngFor="let item of wxAccounts">
       <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
     </ng-container>
   </nz-select>&nbsp;&nbsp;
-  <button nz-button nzType="primary" [routerLink]="['../add',chooseWxSourceId]">
+  <button nz-button nzType="primary" [routerLink]="['../add',params.sourceId]">
     <i nz-icon nzType="plus" nzTheme="outline"></i>添加
   </button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
@@ -22,47 +22,39 @@
   [(nzPageSize)]="pageSize"
   [nzFrontPagination]="false"
   (nzPageIndexChange)="getListByPage(false)"
-  (nzPageSizeChange)="getListByPage(false)"
-  (nzCurrentPageDataChange)="currentPageDataChange($event)">
+  (nzPageSizeChange)="getListByPage(false)">
   <thead nzSingleSort>
   <tr>
-    <th nzShowCheckbox [(nzChecked)]="isAllDisplayDataChecked" [nzIndeterminate]="isIndeterminate"
-        (nzCheckedChange)="checkAll($event)"></th>
     <th>mediaId</th>
-    <th>名称</th>
-    <th>类型</th>
+    <th nzWidth="180px">名称</th>
+    <th nzWidth="90px">类型</th>
     <th>标题</th>
-    <th>创建时间</th>
+    <th nzWidth="90px">创建时间</th>
     <th>操作</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of staffTable.data">
-    <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[data.id]" (nzCheckedChange)="refreshStatus()"></td>
     <td>{{data.mediaId}}</td>
     <td>{{data.name}}</td>
     <td>{{data.type}}</td>
     <td>{{data.title}}</td>
     <td>{{data.created}}</td>
     <td>
-      <button title="修改数据" (click)="goToPage('/wxmaterial/edit',{id:data.id,code:authData.authCode})" nz-button
-              nzType="primary" nzShape="circle" *ngIf="auth.update">
-        <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i></button>
-      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete"
-              title="删除数据" nz-button nzType="primary" nzShape="circle">
-        <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>
+      <button class="button" title="修改数据" (click)="goToPage('/wxmaterial/edit',{id: data.id, code: authData.authCode})" nz-button nzType="primary" *ngIf="auth.update">
+        <i nz-icon nzType="edit" nzTheme="outline" title="编辑"></i>编辑
       </button>
-      <button nz-popconfirm nzPopconfirmTitle='确定生成吗?' (nzOnConfirm)="UploadRow(data.id)" title="生成素材" nz-button
-              nzType="primary" nzShape="circle">
-        <i nz-icon nzType="plus-circle" nzTheme="outline"  title="生成素材"></i>
+      <button nz-popconfirm nzPopconfirmTitle="确定删除吗?" (nzOnConfirm)="deleteRow(data.id)" *ngIf="auth.delete" title="删除数据" nz-button nzType="primary">
+        <i nz-icon nzType="delete" nzTheme="outline" twoToneColor="red" title="删除"></i>删除
       </button>
-      <button nz-popconfirm nzPopconfirmTitle='确定删除永久素材吗?' (nzOnConfirm)="unUploadRow(data.id)" title="删除永久素材" nz-button
-              nzType="primary" nzShape="circle">
-        <i nz-icon nzType="minus-circle" nzTheme="outline"  title="删除永久素材"></i>
+      <button nz-popconfirm nzPopconfirmTitle='确定生成吗?' (nzOnConfirm)="UploadRow(data.id)" title="生成素材" nz-button nzType="primary">
+        <i nz-icon nzType="plus-circle" nzTheme="outline"  title="生成素材"></i>生成
       </button>
-      <button nz-popconfirm nzPopconfirmTitle='确定推送吗?' (nzOnConfirm)="PubRow(data.id)" title="群发素材" nz-button
-              nzType="primary" nzShape="circle">
-        <i nz-icon nzType="user-switch" nzTheme="outline"  title="群发推送"></i>
+      <button nz-popconfirm nzPopconfirmTitle='确定取消永久素材吗?' (nzOnConfirm)="unUploadRow(data.id)" title="取消永久素材" nz-button nzType="primary">
+        <i nz-icon nzType="minus-circle" nzTheme="outline"  title="取消永久素材"></i>取消永久素材
+      </button>
+      <button nz-popconfirm nzPopconfirmTitle='确定推送吗?' (nzOnConfirm)="PubRow(data.id)" title="群发素材" nz-button nzType="primary">
+        <i nz-icon nzType="user-switch" nzTheme="outline"  title="群发推送"></i>群发
       </button>
     </td>
   </tr>

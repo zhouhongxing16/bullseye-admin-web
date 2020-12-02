@@ -56,7 +56,7 @@
   </ng-template>
 </nz-tree>-->
 <nz-modal nzClosable="true" nzMaskClosable="false" [(nzVisible)]="drawerMenuAuthVisible" nzTitle="菜单权限"
-          nzWidth="40%" (nzOnCancel)="close()" [nzFooter]="modalFooter">
+          nzWidth="700px" [nzStyle]="{ top: '40px' }" (nzOnCancel)="close()" [nzFooter]="modalFooter">
   <form nz-form  [formGroup]="validateAuthForm">
     <nz-form-item>
       <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="menuId">菜单</nz-form-label>
@@ -120,7 +120,6 @@
     #menuAuthTable
     nzShowSizeChanger
     [nzData]="rows"
-    [nzScroll]="{x:'100%'}"
     [nzLoading]="isLoading"
     [nzTotal]="total"
     [(nzPageIndex)]="pageIndex"
@@ -130,12 +129,12 @@
     (nzPageSizeChange)="getAuthListByPage()">
     <thead>
       <tr>
-        <th>名称</th>
-        <th>编码</th>
-        <th>描述</th>
-        <th>状态</th>
-        <th>创建时间</th>
-        <th>
+        <th [nzWidth]="100">名称</th>
+        <th [nzWidth]="100">编码</th>
+        <th [nzWidth]="150">描述</th>
+        <th [nzWidth]="100">状态</th>
+        <th [nzWidth]="150">创建时间</th>
+        <th [nzWidth]="100">
           <span>操作</span>
         </th>
       </tr>

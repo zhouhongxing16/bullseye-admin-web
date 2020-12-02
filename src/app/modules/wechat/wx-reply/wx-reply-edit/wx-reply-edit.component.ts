@@ -56,28 +56,40 @@ export class WxReplyEditComponent implements OnInit {
       } else {
         this.obj = new WxReply();
       }
-      if(this.chooseSourceId){
+      if (this.chooseSourceId) {
         this.obj.sourceId = this.chooseSourceId;
       }
-      if(this.obj.keyType == 'news'){
-        this.getMediaId()
+      if (this.obj.keyType === 'news') {
+        this.getMediaId();
       }
     });
     this.validateForm = this.formBuilder.group({
       keyWord: [null, [Validators.required]],
       keyType: [null, [Validators.required]],
-      keyValue: [null, [Validators.required]],
+      keyValue: [null,  [Validators.required]],
       status: [null, [Validators.required]],
-      mediaId: [null, [Validators.required]],
-      url: [null, [Validators.required]],
+      mediaId: [null, [Validators.required]]
     });
+    this.changeKeyType();
   }
 
-  getMediaId (){
+
+  changeKeyType() {
+    console.log(this.validateForm.controls)
+    if (this.obj.keyType === 'news') {
+      this.getMediaId();
+      //this.validateForm.addControl('mediaId', this.formBuilder.group({mediaId: [null, [Validators.required]]}));
+      this.validateForm.removeControl('keyValue');
+    } else if (this.obj.keyType === 'text') {
+     //this.validateForm.addControl('keyValue', this.formBuilder.group({keyValue: [null, [Validators.required]]}));
+      this.validateForm.removeControl('mediaId');
+    }
+  }
+
+  getMediaId(){
     this.wxMaterialService.getEverMaterialBySourceId(this.obj.sourceId).subscribe(res =>{
-      this.wxMaterialList = res
-      console.log(res)
-    })
+      this.wxMaterialList = res;
+    });
   }
 
   submitForm() {

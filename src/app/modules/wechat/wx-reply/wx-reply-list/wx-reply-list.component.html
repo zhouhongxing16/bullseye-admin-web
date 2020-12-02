@@ -1,11 +1,11 @@
 <div class="table-operations">
-  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="chooseSourceId" nzAllowClear nzPlaceHolder="Choose"
-             (ngModelChange)="getListByPage($event, true)">
+  <nz-select id="wxAccountIds" style="width: 20%" [(ngModel)]="params.sourceId" nzAllowClear nzPlaceHolder="Choose"
+             (ngModelChange)="getListByPage(true)">
     <ng-container *ngFor="let item of wxAccounts">
       <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
     </ng-container>
   </nz-select>&nbsp;&nbsp;
-  <button nz-button nzType="primary" [routerLink]="['../add',chooseSourceId]"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
+  <button nz-button nzType="primary" [routerLink]="['../add',params.sourceId]"><i class="anticon anticon-plus"></i>添加</button>&nbsp;&nbsp;
   <button nz-button nzType="dashed"><i class="anticon anticon-delete"></i>删除</button>
 </div>
 <nz-divider nzText="自动回复管理"></nz-divider>
@@ -19,8 +19,8 @@
   [(nzPageIndex)]="pageIndex"
   [(nzPageSize)]="pageSize"
   [nzFrontPagination]="false"
-  (nzPageIndexChange)="getListByPage(chooseSourceId,false)"
-  (nzPageSizeChange)="getListByPage(chooseSourceId,true)">
+  (nzPageIndexChange)="getListByPage(false)"
+  (nzPageSizeChange)="getListByPage(true)">
   <thead nzSingleSort>
   <tr>
     <th nzShowSort nzSortKey="keyWord">关键字</th>
@@ -37,23 +37,23 @@
     <td>{{data.keyWord}}</td>
     <td>
       <span *ngIf="data.keyType=='text'">{{data.keyValue}}</span>
-      <span *ngIf="data.keyType=='news'">{{data.mediaId}}</span>
+      <span *ngIf="data.keyType=='news'">
+        <button nz-button (click)="goToPage('../../wxmaterial/edit',{id:data.materialId,code:authData.authCode})" nzType="primary">{{data.materialTitle}}</button>
+      </span>
     </td>
     <td><ng-container *ngIf="data.keyType=='text'">文本</ng-container>
-        <ng-container *ngIf="data.keyType=='news'">图文</ng-container></td>
+        <ng-container *ngIf="data.keyType=='news'">图文素材</ng-container></td>
     <td>{{data.num}}</td>
     <td><ng-container *ngIf="data.status=='1'">使用</ng-container>
         <ng-container *ngIf="data.status=='2'">禁用</ng-container></td>
     <td>{{data.created}}</td>
     <td>
-      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle"><i
-        class="anticon anticon-edit"></i></button>
-      <nz-popconfirm [nzTitle]="'确定删除吗?'" (nzOnConfirm)="deleteRow(data.id)">
-        <button nz-popconfirm title="修改数据" nz-button nzType="primary" nzShape="circle"><i nz-icon type="delete"
-                                                                                          theme="outline"
-                                                                                          twoToneColor="red"
-                                                                                          title="删除"></i></button>
-      </nz-popconfirm>
+      <button title="修改数据" [routerLink]="['../edit',data.id]" nz-button nzType="primary" nzShape="circle">
+        <i nz-icon nzType="edit" nzTheme="outline" title="修改"></i>
+      </button>
+      <button nz-popconfirm nzPopconfirmTitle='确定删除吗?'  (nzOnConfirm)="deleteRow(data.id)" title="删除数据" nz-button nzType="primary" nzShape="circle">
+        <i nz-icon nzType="delete" nzTheme="outline" title="修改"></i>
+      </button>
     </td>
   </tr>
   </tbody>

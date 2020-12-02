@@ -31,6 +31,8 @@ const routes: Routes = [
       {path: 'wxmenu', loadChildren: () => import( '././modules/wechat/wx-menu/wx-menu.module').then(m => m.WxMenuModule)},
       {path: 'wxreply', loadChildren: () => import( '././modules/wechat/wx-reply/wx-reply.module').then(m => m.WxReplyModule)},
       {path: 'wxmaterial', loadChildren: () => import('././modules/wechat/wx-material/wx-material.module').then(m => m.WxMaterialModule)},
+      {path: 'wxtag', loadChildren: () => import('././modules/wechat/wx-tag/wx-tag.module').then(m => m.WxTagModule)},
+      {path: 'wxtemplate', loadChildren: () => import('././modules/wechat/wx-template/wx-template.module').then(m => m.WxTemplateModule)},
       {
         path: 'dictionarytype',
         loadChildren: () => import('././modules/system/dictionary-type/dictionary-type.module').then(m => m.DictionaryTypeModule)

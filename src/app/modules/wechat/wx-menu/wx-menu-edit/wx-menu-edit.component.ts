@@ -48,6 +48,7 @@ export class WxMenuEditComponent implements OnInit {
         this.obj.sourceId = d.data.sourceId;
       } else if (this.type === 'edit') {
         this.obj = d.data;
+        this.getMediaId();
       }
       console.log(this.obj);
     });

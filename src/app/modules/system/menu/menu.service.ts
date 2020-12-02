@@ -48,10 +48,11 @@ export class MenuService extends BaseService<Menu> {
     } else {
       return this.help.post(`${this.url.getMenuAuthListByPage}`, params).pipe(
         map(res => {
+          console.log(res)
           this.flag = true;
           this.data = {
-            rows: res.rows,
-            total: res.total
+            rows: res.page.list,
+            total: res.page.total
           };
           return this.data;
         }));
