@@ -18,5 +18,10 @@ export class WxTemplateService extends BaseService<WxTemplate> {
     view: '',
     edit: '',
     add: '',
+    getAllPrivateTemplate: '/wxtemplate/getAllPrivateTemplate'
   };
+
+  getAllPrivateTemplate(sourceId: string) {
+    return this.help.get(this.url.getAllPrivateTemplate + `/` + sourceId);
+  }
 }

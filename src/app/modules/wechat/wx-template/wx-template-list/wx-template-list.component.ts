@@ -37,4 +37,18 @@ export class WxTemplateListComponent extends WxBaseListComponent<WxTemplate> {
     });
   }
 
+  getAllPrivateTemplate() {
+    this.help.isLoading = true;
+    this.wxTemplateService.getAllPrivateTemplate(this.params.sourceId).subscribe(res => {
+      this.help.isLoading = false;
+      if (res.success) {
+        this.help.isLoading = false;
+        this.help.showMessage('success', res.message);
+        this.getListByPage(true);
+      } else {
+        this.help.showMessage('error', res.message);
+      }
+    });
+  }
+
 }

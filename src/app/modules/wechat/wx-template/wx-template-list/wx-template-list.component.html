@@ -5,8 +5,8 @@
       <nz-option [nzLabel]="item.name" [nzValue]="item.sourceId"></nz-option>
     </ng-container>
   </nz-select>&nbsp;&nbsp;
-  <button nz-button nzType="primary" >
-    <i nz-icon nzType="plus" nzTheme="outline"></i>添加
+  <button nz-popconfirm nzPopconfirmTitle='确定获取吗?'  (nzOnConfirm)="getAllPrivateTemplate()" title="获取消息模板" nz-button nzType="primary">
+    <i nz-icon nzType="cloud-download" nzTheme="outline"></i>获取消息模板
   </button>&nbsp;&nbsp;
 </div>
 <nz-divider nzText="微信标签管理"></nz-divider>
@@ -24,19 +24,21 @@
   (nzPageSizeChange)="getListByPage(true)">
   <thead nzSingleSort>
   <tr>
-    <th nzShowSort nzSortKey="name">名称</th>
-    <th nzShowSort nzSortKey="tagId">tagId</th>
+    <th nzShowSort nzSortKey="title">标题</th>
+    <th nzShowSort nzSortKey="primary">行业</th>
+    <th nzShowSort nzSortKey="content">内容</th>
     <th><span>操作</span></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of staffTable.data">
-    <td>{{data.name}}</td>
-    <td>{{data.tagId}}</td>
+    <td>{{data.title}}</td>
+    <td>{{data.primaryIndustry}} - {{data.deputy_industry}}</td>
+    <td>{{data.content}}</td>
     <td>
-      <button nz-popconfirm nzPopconfirmTitle='确定删除吗?'  (nzOnConfirm)="deleteRow(data.id)" title="删除数据" nz-button nzType="primary" nzShape="circle">
+      <!--<button nz-popconfirm nzPopconfirmTitle='确定删除吗?'  (nzOnConfirm)="deleteRow(data.id)" title="删除数据" nz-button nzType="primary" nzShape="circle">
         <i nz-icon nzType="delete" nzTheme="outline" title="删除"></i>
-      </button>
+      </button>-->
     </td>
   </tr>
   </tbody>
